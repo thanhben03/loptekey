@@ -62,17 +62,33 @@
                                 </div>
                         </div>
                     </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="header-title mb-3">Lưu ý</h4>
+                            <div class="row mb-3">
+                                <div class="alert alert-warning">
+                                    - Nhớ ấn save nội dung trước khi đăng bài, nội dung không được vượt quá 1000 ký tự
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
 
             </div>
         </form>
-
+        @include('client.history-post')
     </div> <!-- container -->
 @endsection
 
 @push('custom-js')
     <script>
         $(document).ready(function() {
+            $("#history-post-datatable").DataTable({
+                order: [
+                    [2, 'desc']
+                ]
+            })
             let msg = $("#msg").val()
             console.log(msg)
             if (msg) {
@@ -147,6 +163,7 @@
             document.getElementById('content').value = editor.getContents();
 
         }
+
 
         async function buyKey() {
             const confrim = await Swal.fire({

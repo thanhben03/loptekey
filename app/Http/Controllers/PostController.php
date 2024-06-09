@@ -22,7 +22,13 @@ class PostController extends Controller
     {
         $games = Game::all();
         $movies = Movie::all();
-        return view('client.post', compact('games', 'movies'));
+        $user = Auth::user();
+        $posts = UserPost::query()
+            ->where('user_id', $user->id)
+            ->join('posts','posts.id', '=', 'user_posts.post_id')
+            ->orderBy('posts.updated_at', 'desc')
+            ->get();
+        return view('client.post', compact('games', 'movies', 'posts'));
     }
 
     public function store(Request $request)
@@ -99,5 +105,17 @@ class PostController extends Controller
             'msg' => 'success'
         ]);
 
+    }
+
+    public function destroy($id)
+    {
+        $user = Auth::user();
+        $myPost = UserPost::query()
+            ->where('user_id', $user->id)
+            ->where('post_id', $id)
+            ->firstOrFail();
+        $myPost->post->delete();
+
+        return redirect()->back();
     }
 }

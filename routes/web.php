@@ -17,12 +17,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
-Route::get('/home', [HomeController::class, 'home'])->middleware(['auth', 'verified'])->name('home');
+Route::get('/', [HomeController::class, 'home'])->middleware(['auth', 'verified'])->name('home');
 Route::get('/bai-viet', [PostController::class, 'index'])->name('post');
+Route::get('/quan-ly-bai-dang', [PostController::class, 'managePost'])->name('managePost');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -31,6 +29,7 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/buy-key', [KeyController::class, 'buyKey'])->name('buyKey');
     Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
+    Route::delete('/posts/{id}', [PostController::class, 'destroy'])->name('posts.delete');
 });
 
 Route::get('/main-post', [PostController::class, 'mainPost'])->name('mainPost');

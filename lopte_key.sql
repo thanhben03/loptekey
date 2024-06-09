@@ -3,15 +3,15 @@
 
  Source Server         : boss_travel
  Source Server Type    : MySQL
- Source Server Version : 80030 (8.0.30)
+ Source Server Version : 100432 (10.4.32-MariaDB)
  Source Host           : localhost:3306
  Source Schema         : lopte_key
 
  Target Server Type    : MySQL
- Target Server Version : 80030 (8.0.30)
+ Target Server Version : 100432 (10.4.32-MariaDB)
  File Encoding         : 65001
 
- Date: 06/06/2024 09:27:17
+ Date: 08/06/2024 20:20:50
 */
 
 SET NAMES utf8mb4;
@@ -27,7 +27,7 @@ CREATE TABLE `countries`  (
   `created_at` datetime NULL DEFAULT NULL,
   `updated_at` datetime NULL DEFAULT NULL,
   `slug` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of countries
@@ -47,10 +47,10 @@ CREATE TABLE `failed_jobs`  (
   `queue` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `payload` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `exception` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `failed_at` timestamp NOT NULL DEFAULT current_timestamp,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `failed_jobs_uuid_unique`(`uuid` ASC) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of failed_jobs
@@ -74,7 +74,7 @@ CREATE TABLE `games`  (
   `type` int NULL DEFAULT NULL,
   `view` int NULL DEFAULT NULL,
   `genre_name` int NULL DEFAULT NULL
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of games
@@ -95,7 +95,7 @@ CREATE TABLE `games_genres`  (
   `slug` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `created_at` datetime NULL DEFAULT NULL,
   `updated_at` datetime NULL DEFAULT NULL
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of games_genres
@@ -111,7 +111,7 @@ CREATE TABLE `games_links`  (
   `id` int NULL DEFAULT NULL,
   `game_id` int NULL DEFAULT NULL,
   `link` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of games_links
@@ -129,7 +129,7 @@ CREATE TABLE `genres`  (
   `created_at` datetime NULL DEFAULT NULL,
   `updated_at` datetime NULL DEFAULT NULL,
   `slug` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of genres
@@ -150,7 +150,7 @@ CREATE TABLE `key_types`  (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of key_types
@@ -177,7 +177,7 @@ CREATE TABLE `keys`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `keys_key_type_id_foreign`(`key_type_id` ASC) USING BTREE,
   CONSTRAINT `keys_key_type_id_foreign` FOREIGN KEY (`key_type_id`) REFERENCES `key_types` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of keys
@@ -200,7 +200,7 @@ CREATE TABLE `migrations`  (
   `migration` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of migrations
@@ -221,7 +221,7 @@ DROP TABLE IF EXISTS `movie_banners`;
 CREATE TABLE `movie_banners`  (
   `id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `movie_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of movie_banners
@@ -235,7 +235,7 @@ CREATE TABLE `movie_countries`  (
   `id` int NULL DEFAULT NULL,
   `movie_id` int NULL DEFAULT NULL,
   `country_id` int NULL DEFAULT NULL
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of movie_countries
@@ -278,7 +278,7 @@ CREATE TABLE `movie_genres`  (
   `id` int NULL DEFAULT NULL,
   `movie_id` int NULL DEFAULT NULL,
   `genre_id` int NULL DEFAULT NULL
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of movie_genres
@@ -369,7 +369,7 @@ CREATE TABLE `movie_links`  (
   `movie_id` int NULL DEFAULT NULL,
   `link` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of movie_links
@@ -476,7 +476,7 @@ CREATE TABLE `movies`  (
   `view` int NULL DEFAULT NULL,
   `trailer` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `country` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of movies
@@ -574,7 +574,7 @@ CREATE TABLE `orders`  (
   INDEX `orders_key_id_foreign`(`key_id` ASC) USING BTREE,
   CONSTRAINT `orders_key_id_foreign` FOREIGN KEY (`key_id`) REFERENCES `keys` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT,
   CONSTRAINT `orders_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 16 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 16 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of orders
@@ -598,7 +598,7 @@ CREATE TABLE `password_reset_tokens`  (
   `token` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`email`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of password_reset_tokens
@@ -619,7 +619,7 @@ CREATE TABLE `payments`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `payments_user_id_foreign`(`user_id` ASC) USING BTREE,
   CONSTRAINT `payments_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of payments
@@ -643,7 +643,7 @@ CREATE TABLE `personal_access_tokens`  (
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `personal_access_tokens_token_unique`(`token` ASC) USING BTREE,
   INDEX `personal_access_tokens_tokenable_type_tokenable_id_index`(`tokenable_type` ASC, `tokenable_id` ASC) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of personal_access_tokens
@@ -662,11 +662,31 @@ CREATE TABLE `pets`  (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of pets
 -- ----------------------------
+
+-- ----------------------------
+-- Table structure for post_likes
+-- ----------------------------
+DROP TABLE IF EXISTS `post_likes`;
+CREATE TABLE `post_likes`  (
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `ip` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `post_id` bigint UNSIGNED NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `post_id`(`post_id` ASC) USING BTREE,
+  CONSTRAINT `post_likes_ibfk_1` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of post_likes
+-- ----------------------------
+INSERT INTO `post_likes` VALUES (8, '127.0.0.1', 1, '2024-06-07 20:09:07', '2024-06-07 20:09:07');
 
 -- ----------------------------
 -- Table structure for posts
@@ -677,16 +697,27 @@ CREATE TABLE `posts`  (
   `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `slug` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `content` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL,
-  `tag_id` bigint UNSIGNED NULL DEFAULT NULL,
+  `tag_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `status` tinyint NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of posts
 -- ----------------------------
+INSERT INTO `posts` VALUES (1, 'ewqeqwe qư eqw', 'ewqeqwe-qu-eqw', '<p>ưqqwewqe</p>', 'Dead Target Mod Full Guns Vip ( Coin, Dimion, Iteam, Skin )', '2024-06-06 11:54:04', '2024-06-07 13:12:46', 1);
+INSERT INTO `posts` VALUES (2, 'ewqeqwe qư eqw', 'ewqeqwe-qu-eqw', '<p>ưqqwewqe</p>', 'Dead Target Mod Full Guns Vip ( Coin, Dimion, Iteam, Skin )', '2024-06-06 11:54:27', '2024-06-07 13:12:48', 1);
+INSERT INTO `posts` VALUES (3, 'dasdasdas asdasdad', 'dasdasdas-asdasdad', '<p>asdasdas 13213</p>', 'Ben Nguyen 2233', '2024-06-06 11:54:50', '2024-06-07 20:07:33', 1);
+INSERT INTO `posts` VALUES (4, 'asdasd asdasdas dasdasd as dasdasd', 'asdasd-asdasdas-dasdasd-as-dasdasd', NULL, 'Dead Target Mod Full Guns Vip ( Coin, Dimion, Iteam, Skin )', '2024-06-06 13:34:06', '2024-06-06 13:34:06', 0);
+INSERT INTO `posts` VALUES (5, NULL, '', '<p>hfh</p>', 'Dead Target Mod Full Guns Vip ( Coin, Dimion, Iteam, Skin )', '2024-06-06 13:50:17', '2024-06-06 13:50:17', 0);
+INSERT INTO `posts` VALUES (6, NULL, '', '<p>vcxv</p>', 'Dead Target Mod Full Guns Vip ( Coin, Dimion, Iteam, Skin )', '2024-06-06 13:51:10', '2024-06-06 13:51:10', 0);
+INSERT INTO `posts` VALUES (7, NULL, '', '<p>adasd</p>', 'Dead Target Mod Full Guns Vip ( Coin, Dimion, Iteam, Skin )', '2024-06-06 13:52:24', '2024-06-06 13:52:24', 0);
+INSERT INTO `posts` VALUES (8, NULL, '', '<p>đâs</p>', 'Dead Target Mod Full Guns Vip ( Coin, Dimion, Iteam, Skin )', '2024-06-06 13:52:45', '2024-06-06 13:52:45', 0);
+INSERT INTO `posts` VALUES (9, NULL, '', '<p>sad</p>', 'Dead Target Mod Full Guns Vip ( Coin, Dimion, Iteam, Skin )', '2024-06-06 13:53:00', '2024-06-06 13:53:00', 0);
+INSERT INTO `posts` VALUES (10, 'Top 5 Món Ăn Truyền Thống Đốn Tim Gen Z Khi Tới Huế, set kèo \"săn lùng\" ngay thôi! Vẻ đẹ', 'top-5-mon-an-truyen-thong-don-tim-gen-z-khi-toi-hue-set-keo-san-lung-ngay-thoi-ve-de', '<p>13123 123123</p>', 'Dead Target Mod Full Guns Vip ( Coin, Dimion, Iteam, Skin )', '2024-06-07 20:24:50', '2024-06-07 20:24:50', 0);
+INSERT INTO `posts` VALUES (11, 'Top 5 Quán Ăn Lâu Đời Nhất Quanh Phố Cổ Hội An, bạn đã thưởng qua?', 'top-5-quan-an-lau-doi-nhat-quanh-pho-co-hoi-an-ban-da-thuong-qua', '<p>Vẻ đẹp trường tồn của cố đô Huế không chỉ nằm ở nét quyến rũ của những danh lam thắng cảnh nổi tiếng mà còn ở văn hóa ẩm thực độc đáo, luôn đậm sắc đủ hương và không gì có thể thay thế được. Ẩm thực Huế cho đến nay đã trở thành một triết lý, gắn liền với con người và chiều dài lịch sử của đất cố đô trăm năm mà thành. Bởi vậy cho dù bạn là gen X, gen Y hay gen Z thì vẫn không thể nào thoát khỏi sự hấp dẫn trời sinh của nền ẩm thực muôn màu vạn sắc này. Hôm nay trong số ẩm thực mới, hãy cùng Shopeefood điểm qua top 5 món ăn truyền thông đốn tim Gen Z khi tới Huế để hiểu thêm về con người, văn hóa xứ cố đô nhé!<br></p>', 'Dead Target Mod Full Guns Vip ( Coin, Dimion, Iteam, Skin )', '2024-06-07 20:33:25', '2024-06-07 20:34:53', 1);
 
 -- ----------------------------
 -- Table structure for sessions
@@ -699,11 +730,28 @@ CREATE TABLE `sessions`  (
   `user_agent` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `payload` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `last_activity` int NULL DEFAULT NULL
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sessions
 -- ----------------------------
+
+-- ----------------------------
+-- Table structure for total_rewards
+-- ----------------------------
+DROP TABLE IF EXISTS `total_rewards`;
+CREATE TABLE `total_rewards`  (
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `total_reward` int NULL DEFAULT NULL,
+  `apply_date` date NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of total_rewards
+-- ----------------------------
+INSERT INTO `total_rewards` VALUES (1, 100000, '2024-06-07');
+INSERT INTO `total_rewards` VALUES (2, 200000, '2024-07-01');
 
 -- ----------------------------
 -- Table structure for user_posts
@@ -718,11 +766,22 @@ CREATE TABLE `user_posts`  (
   INDEX `post_id`(`post_id` ASC) USING BTREE,
   CONSTRAINT `user_posts_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT,
   CONSTRAINT `user_posts_ibfk_2` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of user_posts
 -- ----------------------------
+INSERT INTO `user_posts` VALUES (1, 1, 1);
+INSERT INTO `user_posts` VALUES (2, 1, 2);
+INSERT INTO `user_posts` VALUES (3, 1, 3);
+INSERT INTO `user_posts` VALUES (4, 1, 5);
+INSERT INTO `user_posts` VALUES (5, 1, 6);
+INSERT INTO `user_posts` VALUES (6, 1, 7);
+INSERT INTO `user_posts` VALUES (7, 1, 8);
+INSERT INTO `user_posts` VALUES (8, 1, 9);
+INSERT INTO `user_posts` VALUES (9, 1, 4);
+INSERT INTO `user_posts` VALUES (10, 1, 10);
+INSERT INTO `user_posts` VALUES (11, 1, 11);
 
 -- ----------------------------
 -- Table structure for users
@@ -738,13 +797,15 @@ CREATE TABLE `users`  (
   `remember_token` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
+  `avatar` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `users_email_unique`(`email` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of users
 -- ----------------------------
-INSERT INTO `users` VALUES (1, 'Admin', 740000, 'nben19732@gmail.com', NULL, '$2y$12$Il2hsGVaWQsqWVq0xUYHQu1OHUuD8GwPbfvNJ8IFeA1DpreUFXRTm', NULL, '2024-06-01 05:16:01', '2024-06-04 15:07:27');
+INSERT INTO `users` VALUES (1, 'Admin1', 740000, 'nben19732@gmail.com', NULL, '$2y$12$Il2hsGVaWQsqWVq0xUYHQu1OHUuD8GwPbfvNJ8IFeA1DpreUFXRTm', NULL, '2024-06-01 05:16:01', '2024-06-06 15:36:56', '/uploads/avatar/1717663016mon-ngon-quan-1-mi-kho-xa-xiu.jpg');
+INSERT INTO `users` VALUES (3, 'Nguyễn Hồ Thanh Bền', 0, 'nben19733@gmail.com', NULL, '$2y$12$7Uvg9fPELCKhF/Gg0BgD6.tEn/vmhcg5Sf8ck3MJKp6skXpTN.JlW', NULL, '2024-06-06 13:56:01', '2024-06-06 13:56:01', '');
 
 SET FOREIGN_KEY_CHECKS = 1;
