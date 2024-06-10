@@ -65,7 +65,7 @@
                 <li class="menu-title">Menu</li>
 
                 <li class="menu-item">
-                    <a href="apps-calendar.html" class="menu-link waves-effect waves-light">
+                    <a href="" class="menu-link waves-effect waves-light">
                         <span class="menu-icon"><i class="bx bxs-bank"></i></span>
                         <span class="menu-text"> Nạp tiền </span>
                     </a>
@@ -82,6 +82,11 @@
                             <li class="menu-item">
                                 <a href="{{route('post')}}" class="menu-link">
                                     <span class="menu-text">Đăng bài</span>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="{{route('mainPost')}}" class="menu-link">
+                                    <span class="menu-text">Tất cả bài đăng</span>
                                 </a>
                             </li>
 {{--                            <li class="menu-item">--}}
