@@ -31,7 +31,9 @@ class PostResource extends Resource
                 ->options([
                     '1' => 'Phê duyệt',
                     '0' => 'Từ chối',
-                ])
+                ]),
+                Forms\Components\RichEditor::make('content')
+                ->label('Content')
 
             ]);
     }

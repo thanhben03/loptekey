@@ -30,6 +30,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/buy-key', [KeyController::class, 'buyKey'])->name('buyKey');
     Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
     Route::delete('/posts/{id}', [PostController::class, 'destroy'])->name('posts.delete');
+    Route::get('/bai-viet/edit/{id}', [PostController::class, 'edit'])->name('posts.edit');
+    Route::put('/bai-viet/update/{id}', [PostController::class, 'update'])->name('posts.update');
 });
 
 Route::get('/main-post', [PostController::class, 'mainPost'])->name('mainPost');

@@ -17,15 +17,21 @@ class KeyController extends Controller
     {
         try {
             DB::beginTransaction();
+            $user = Auth::user();
             $data = $request->validated();
             $existKeyType = KeyType::query()->find($data['key_id']);
+
+            if ($user->money < $existKeyType->price) {
+                throw new \Error('Số dư không đủ để mua key này !');
+
+            }
+
             $existKey = Key::query()
                 ->where('key_type_id', $existKeyType->id)
                 ->where('status', StatusKeyEnum::NotBuy)
                 ->first();
             if ($existKey == null)
                 throw new \Error('Key tạm hết !');
-            $user = Auth::user();
             if ($user->money >= $existKeyType->price) {
                 $user->money -= $existKeyType->price;
                 $user->save();

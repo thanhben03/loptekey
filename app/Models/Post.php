@@ -26,6 +26,11 @@ class Post extends Model
 
     }
 
+    public function images()
+    {
+        return $this->hasMany(PostImage::class);
+    }
+
     public function scopeActive($query)
     {
         return $query->where('status', 1);

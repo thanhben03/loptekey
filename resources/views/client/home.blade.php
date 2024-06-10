@@ -8,7 +8,7 @@
                 <div class="col-lg-6">
                     <div class="alert alert-success">Chúc bạn một ngày tốt lành !</div>
                 </div>
-                
+
             </div>
         </div>
         <!-- end page title -->
@@ -65,9 +65,9 @@
                                                     <td>{{$item->key->keyType->name_type}}</td>
                                                     <td>{{$item->key->keyType->price}}</td>
                                                     <td>
-                                                        @if($item->key->status)
+                                                        @if($item->key->status == 2)
                                                             Đã kích hoạt
-                                                        @else
+                                                        @else 
                                                             Chưa kích hoạt
                                                         @endif
                                                     </td>
