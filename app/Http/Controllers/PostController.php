@@ -85,6 +85,25 @@ class PostController extends Controller
         return view('client.main-post', compact('posts', 'user', 'tops'));
     }
 
+    public function hidePost()
+    {
+        $posts = Post::query()
+            ->active()
+            ->orderBy('updated_at', 'desc')
+            ->get();
+        $user = Auth::user();
+        $now = Carbon::now();
+        $month = $now->month;
+        $year = $now->year;
+        $tops = PostLike::query()->select('post_id', DB::raw('count(*) as like_count'))
+            ->whereMonth('created_at', $month)
+            ->whereYear('created_at', $year)
+            ->groupBy('post_id')
+            ->orderBy('like_count', 'desc')
+            ->get();
+        return view('client.hide-post', compact('posts', 'user', 'tops'));
+    }
+
     public function likePost(Request $request)
     {
         $data = $request->all();
@@ -134,15 +153,18 @@ class PostController extends Controller
             $data = $request->validate([
                 'title' => 'required|max:100',
                 'slug' => 'nullable',
-                'content' => 'required',
+                'content' => 'required:max:1000',
                 'tag_name' => 'required'
             ]);
             $inserts = [];
             if($request->hasfile('files'))
             {
-                PostImage::query()
-                    ->where('post_id', $id)
-                    ->delete();
+                $totalImage = PostImage::query()->where('post_id', $id)->count();
+                $totalImage += count($request->file('files'));
+                if ($totalImage > 3) {
+
+                    throw new \Error('Chỉ cho phép tối đa 3 ảnh !');
+                }
                 foreach($request->file('files') as $file)
                 {
                     $image_name = time().$file->getClientOriginalName();

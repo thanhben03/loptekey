@@ -35,6 +35,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/main-post', [PostController::class, 'mainPost'])->name('mainPost');
+Route::get('/hide-post', [PostController::class, 'hidePost'])->name('hidePost');
 Route::post('like-post', [PostController::class, 'likePost'])->name('likePost');
 
 require __DIR__.'/auth.php';

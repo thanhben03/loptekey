@@ -118,9 +118,8 @@
                     e.preventDefault();
 
                 }
-                if (content.val().length > 1000) {
-                    alert('Nội dung không được vượt quá 255 ký tự')
-                    console.log('ahihi')
+                if (content.val().length > 500) {
+                    alert('Nội dung không được vượt quá 500 ký tự')
                     e.preventDefault()
 
                 }

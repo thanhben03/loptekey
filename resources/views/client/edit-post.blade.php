@@ -115,8 +115,8 @@
             const formData = new FormData();
             // Append each selected file to the FormData object
             let images = '';
-            if (selectedFiles.length > 5) {
-                alert('Upload tối đa 10 ảnh !')
+            if (selectedFiles.length > 3) {
+                alert('Upload tối đa 3 ảnh !')
                 fileInput.value = '';
                 return;
             }
@@ -165,6 +165,12 @@
                 if (content.val() == '') {
                     alert('Vui lòng ấn save để lưu nội dung bài viết');
                     e.preventDefault();
+
+                }
+
+                if (content.val().length > 1500) {
+                    alert('Nội dung quá dài !')
+                    e.preventDefault()
 
                 }
             })
