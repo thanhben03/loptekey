@@ -17,9 +17,9 @@
             <div class="col-6">
                 <h2>Nạp tiền</h2>
                 <div class="">
-                    <label>Nhập số tiền cần nạp !</label>
-                    <input type="text" class="form-control mb-4">
-                    <a href="" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal">Nạp tiền</a>
+                    <button class="btn btn-info" id="btn-charge">
+                        Liên hệ
+                    </button>
                 </div>
             </div>
             <div class="col-6">
@@ -29,7 +29,7 @@
         </div>
         <div class="row mt-4">
             <div class="col-6">
-                <h2>Key mua gần đây</h2>
+                <h2>Lich sử nạp</h2>
             </div>
         </div>
 
@@ -86,7 +86,25 @@
 @endsection
 
 @push('custom-js')
+
     <script>
+        $(function () {
+            Swal.fire({
+                title: "Thông báo !",
+                html: `
+                <p>Inbox qua fanpage hoặc telegram: </p>
+                <div>
+                    <span>Telegram: </span><a href='https://t.me/LopteMod'>Click</a><br>
+                    <span>Fanpage: </span><a href='https://www.facebook.com/cnlopte'>Click</a>
+                </div>
+                `,
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "OK"
+            })
+        })
         $("#basic-datatable").DataTable()
 
         async function charge() {
