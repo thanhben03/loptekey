@@ -59,4 +59,9 @@ class KeyController extends Controller
         }
 
     }
+
+    public function createKey(Request $request)
+    {
+        dd($request->all());
+    }
 }

@@ -65,9 +65,9 @@
                 <li class="menu-title">Menu</li>
 
                 <li class="menu-item">
-                    <a href="" class="menu-link waves-effect waves-light">
+                    <a href="{{route('charge')}}" class="menu-link waves-effect waves-light">
                         <span class="menu-icon"><i class="bx bxs-bank"></i></span>
-                        <span class="menu-text"> Nạp tiền </span>
+                        <span class="menu-text">Nạp tiền</span>
                     </a>
                 </li>
 

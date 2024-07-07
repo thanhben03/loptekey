@@ -15,4 +15,9 @@ class HomeController extends Controller
         $historyBuy = Order::query()->where('user_id', Auth::user()->id)->get();
         return view('client.home', compact('keyType', 'historyBuy'));
     }
+
+    public function charge()
+    {
+        return view('client.charge');
+    }
 }

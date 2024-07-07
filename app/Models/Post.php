@@ -31,6 +31,11 @@ class Post extends Model
         return $this->hasMany(PostImage::class);
     }
 
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
     public function scopeActive($query)
     {
         return $query->where('status', 1);

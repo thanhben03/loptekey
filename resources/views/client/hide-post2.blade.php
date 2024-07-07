@@ -59,46 +59,22 @@
                                         <figure class="avatar me-3"><img src="{{$post->user_post[0]->user->avatar}}" alt="image" class="shadow-sm rounded-circle w45"></figure>
                                         <h4 class="fw-700 text-grey-900 font-xssss mt-1">{{$post->user_post[0]->user->name}}<span class="d-block font-xssss fw-500 mt-1 lh-3 text-grey-500">{{$post->updated_at->diffForHumans()}}</span></h4>
                                         <a href="#" class="ms-auto" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false"><i class="ti-more-alt text-grey-900 btn-round-md bg-greylight font-xss"></i></a>
-                                        {{--                                    <div class="dropdown-menu dropdown-menu-end p-4 rounded-xxl border-0 shadow-lg" aria-labelledby="dropdownMenu2">--}}
-                                        {{--                                        <div class="card-body p-0 d-flex">--}}
-                                        {{--                                            <i class="feather-bookmark text-grey-500 me-3 font-lg"></i>--}}
-                                        {{--                                            <h4 class="fw-600 text-grey-900 font-xssss mt-0 me-4">Save Link <span class="d-block font-xsssss fw-500 mt-1 lh-3 text-grey-500">Add this to your saved items</span></h4>--}}
-                                        {{--                                        </div>--}}
-                                        {{--                                        <div class="card-body p-0 d-flex mt-2">--}}
-                                        {{--                                            <i class="feather-alert-circle text-grey-500 me-3 font-lg"></i>--}}
-                                        {{--                                            <h4 class="fw-600 text-grey-900 font-xssss mt-0 me-4">Hide Post <span class="d-block font-xsssss fw-500 mt-1 lh-3 text-grey-500">Save to your saved items</span></h4>--}}
-                                        {{--                                        </div>--}}
-                                        {{--                                        <div class="card-body p-0 d-flex mt-2">--}}
-                                        {{--                                            <i class="feather-alert-octagon text-grey-500 me-3 font-lg"></i>--}}
-                                        {{--                                            <h4 class="fw-600 text-grey-900 font-xssss mt-0 me-4">Hide all from Group <span class="d-block font-xsssss fw-500 mt-1 lh-3 text-grey-500">Save to your saved items</span></h4>--}}
-                                        {{--                                        </div>--}}
-                                        {{--                                        <div class="card-body p-0 d-flex mt-2">--}}
-                                        {{--                                            <i class="feather-lock text-grey-500 me-3 font-lg"></i>--}}
-                                        {{--                                            <h4 class="fw-600 mb-0 text-grey-900 font-xssss mt-0 me-4">Unfollow Group <span class="d-block font-xsssss fw-500 mt-1 lh-3 text-grey-500">Save to your saved items</span></h4>--}}
-                                        {{--                                        </div>--}}
-                                        {{--                                    </div>--}}
+
                                     </div>
-                                    <div id="show-content-{{$post->id}}" class="card-body p-0 me-lg-5 position-relative">
+                                    <div id="show-content-{{$post->id}}" class="card-body p-0 me-lg-5 position-relative hide-content-post">
                                         <h3><strong>{{$post->title}}</strong></h3>
                                         <p class="fw-500 text-grey-500 lh-26 font-xssss w-100">
                                             {!! $post->content !!}
-{{--                                            @if(!in_array(request()->ip(), array_column($post->like->toArray(), "ip")))--}}
-{{--                                                <a href="#" style="background: aqua" class="fw-600 text-primary">--}}
-{{--                                                    Bạn phải ấn like để xem hết nội dung bài viết và hình ảnh !--}}
-{{--                                                </a>--}}
-{{--                                            @endif--}}
-                                        </p>
-                                        <div  class="col-12 @if(!$post->link) d-none @endif">
-                                            Link:
                                             @if(!in_array(request()->ip(), array_column($post->like->toArray(), "ip")))
-                                                <span style="background: aquamarine;">Bạn phải ấn like để thấy link download !</span>
-                                            @else
-                                                <a href="{{$post->link}}">{{$post->link}}</a>
+                                                <a href="#" style="background: aqua" class="fw-600 text-primary">
+                                                    Bạn phải ấn like để xem hết nội dung bài viết và hình ảnh !
+                                                </a>
                                             @endif
-                                        </div>
+                                        </p>
+
                                     </div>
                                     <div id="show-image-post" class="card-body d-block p-0 ">
-                                        <div id="show-image-{{$post->id}}" class="row ps-2 pe-2 ">
+                                        <div id="show-image-{{$post->id}}" class="row ps-2 pe-2 @if(!in_array(request()->ip(), array_column($post->like->toArray(), "ip"))) d-none @endif">
                                             @if(count($post->images) >= 1)
                                                 @foreach($post->images as $image)
                                                     <div class="col-xs-4 col-sm-4 p-1">
@@ -109,19 +85,37 @@
                                                 @endforeach
                                             @endif
 
-
+{{--                                            <div class="col-xs-4 col-sm-4 p-1">--}}
+{{--                                                <a href="images/t-11.jpg" data-lightbox="roadtrip"><img src="images/t-11.jpg" class="rounded-3 w-100" alt="image"></a>--}}
+{{--                                            </div>--}}
 
                                         </div>
                                     </div>
                                     <div class="card-body d-flex p-0 mt-3">
                                         <a href="#" class="emoji-bttn d-flex align-items-center fw-600 text-grey-900 text-dark lh-26 font-xssss me-2">
+                                            @if(count($post->like) >= 1)
+                                                @foreach($post->like as $like)
+                                                    @if($like->ip == request()->ip())
+                                                        <i
+                                                            class="feather-thumbs-up me-1 btn-round-xs font-md"
+                                                            style="color: chartreuse"
 
-                                            <a style="color: unset" href="vidu.com" target="_blank">
+                                                        >
+                                                        </i>
+                                                        @php
+                                                            break;
+                                                        @endphp
+                                                    @endif
+                                                @endforeach
+                                            @else
                                                 <i
+                                                    onclick="likePost({{$post->id}})"
                                                     class="feather-thumbs-up me-1 btn-round-xs font-md"
+                                                    id="btn-like-{{$post->id}}"
+
                                                 >
                                                 </i>
-                                            </a>
+                                            @endif
                                             <span id="post-{{$post->id}}">{{isset($post->like) ? $post->like->count() : 0}} </span>
 
                                             <div class="dropdown-menu dropdown-menu-end p-4 rounded-xxl border-0 shadow-lg" aria-labelledby="dropdownMenu21">

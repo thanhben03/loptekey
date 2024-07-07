@@ -8,6 +8,7 @@ use App\Models\Order;
 use App\Models\Post;
 use App\Models\PostImage;
 use App\Models\PostLike;
+use App\Models\User;
 use App\Models\UserPost;
 use App\Supports\Eloquent\Sluggable;
 use Doctrine\DBAL\Driver\OCI8\Exception\Error;
@@ -38,17 +39,23 @@ class PostController extends Controller
         if (!$this->canPost()) {
             return redirect()->back()->with('msg', 'Bạn không có quyền đăng !');
         }
-        $data = $request->validate([
-            'title' => 'required|max:100',
-            'slug' => 'nullable',
-            'content' => 'required|max:1000',
-            'tag_name' => 'required'
-        ]);
-        $post = Post::query()->create($data);
-        UserPost::query()->create([
-            'user_id' => Auth::user()->id,
-            'post_id' => $post->id
-        ]);
+        try {
+            $data = $request->validate([
+                'title' => 'required|max:100',
+                'slug' => 'nullable',
+                'content' => 'required|max:1000',
+                'tag_name' => 'required',
+                'link' => 'nullable',
+            ]);
+
+            $post = Post::query()->create($data);
+            UserPost::query()->create([
+                'user_id' => Auth::user()->id,
+                'post_id' => $post->id
+            ]);
+        } catch (\Throwable $e) {
+            dd($e->getMessage());
+    }
 
         return redirect()->back()->with('msg', 'Created Success !');
     }
@@ -66,23 +73,38 @@ class PostController extends Controller
 
     }
 
-    public function mainPost()
+    public function mainPost(Request $request)
     {
         $posts = Post::query()
-            ->active()
-            ->orderBy('updated_at', 'desc')
-            ->get();
+                ->active()
+                ->orderBy('updated_at', 'desc')
+                ->get();
+        $fromUser = '';
+        if ($request->query('user_id')) {
+            $fromUser = User::query()->where('id', $request->query('user_id'))->first()->name;
+            $user_posts = UserPost::query()
+                ->where('user_id', $request->query('user_id'))
+                ->pluck('post_id')->toArray();
+            $posts = Post::query()
+                ->active()
+                ->whereIn('id', $user_posts)
+                ->orderBy('updated_at', 'desc')
+                ->get();
+        }
+
+
         $user = Auth::user();
         $now = Carbon::now();
         $month = $now->month;
         $year = $now->year;
+
         $tops = PostLike::query()->select('post_id', DB::raw('count(*) as like_count'))
             ->whereMonth('created_at', $month)
             ->whereYear('created_at', $year)
             ->groupBy('post_id')
             ->orderBy('like_count', 'desc')
             ->get();
-        return view('client.main-post', compact('posts', 'user', 'tops'));
+        return view('client.main-post', compact('posts', 'user', 'tops', 'fromUser'));
     }
 
     public function hidePost()
@@ -108,6 +130,7 @@ class PostController extends Controller
     {
         $data = $request->all();
         $data['ip'] = $request->ip();
+        $post = Post::query()->where('id', $data['post_id'])->first();
         $isLike = PostLike::query()
             ->where('post_id', $data['post_id'])
             ->where('ip', $data['ip'])
@@ -122,7 +145,8 @@ class PostController extends Controller
         }
         return response()->json([
             'status' => 'success',
-            'msg' => 'success'
+            'msg' => 'success',
+            'link' => $post->link
         ]);
 
     }

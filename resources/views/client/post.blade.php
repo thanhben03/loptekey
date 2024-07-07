@@ -43,19 +43,28 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 class="header-title mb-3">Tag</h4>
-                                <div class="row mb-3">
-                                    <label for="inputEmail3" class="col-sm-3 col-form-label">Game/Phim</label>
-                                    <div class="col-sm-9">
-                                        <select id="choose-tag" name="tag_name" >
-                                            @foreach($games as $game)
-                                                <option value="{{$game->name}}">{{$game->name}}</option>
-                                            @endforeach
-                                            @foreach($movies as $movie)
-                                                    <option value="{{$movie->name}}">{{$movie->title}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
+                            <div class="row mb-3">
+                                <label for="inputEmail3" class="col-sm-3 col-form-label">Game/Phim</label>
+                                <div class="col-sm-9">
+                                    <select onchange="test()" id="choose-tag" name="tag_name" >
+                                        @foreach($games as $game)
+                                            <option value="{{$game->name}}">{{$game->name}}</option>
+                                        @endforeach
+                                        @foreach($movies as $movie)
+                                            <option value="{{$movie->title}}">{{$movie->title}}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="header-title mb-3">Link</h4>
+                            <div class="row mb-3">
+                                <label for="inputEmail3" class="col-sm-3 col-form-label">Link</label>
+                                <input type="text" name="link" class="form-control" placeholder="Liên kết tải xuống">
+                            </div>
                         </div>
                     </div>
                     <div class="card">
@@ -80,6 +89,9 @@
 
 @push('custom-js')
     <script>
+        function test() {
+            console.log($("#choose-tag").val());
+        }
         $(document).ready(function() {
             $("#history-post-datatable").DataTable({
                 order: [

@@ -14,8 +14,10 @@
     <!-- Custom Stylesheet -->
     <link rel="stylesheet" href="{{asset('post/css/style.css')}}">
     <link rel="stylesheet" href="{{asset('post/css/emoji.css')}}">
-
     <link rel="stylesheet" href="{{asset('post/css/lightbox.css')}}">
+    <link rel="stylesheet" href="{{asset('post/css/custom.css')}}">
+    <link rel="stylesheet" href="{{asset('user/assets/libs/sweetalert2/sweetalert2.min.css')}}">
+
     <style>
         .hide-content-post > p {
             display: -webkit-box;
@@ -217,6 +219,7 @@
 
 
 <script src="{{asset('post/js/plugin.js')}}"></script>
+<script src="{{asset('user/assets/libs/sweetalert2/sweetalert2.min.js')}}"></script>
 
 <script src="{{asset('post/js/lightbox.js')}}"></script>
 <script src="{{asset('post/js/scripts.js')}}"></script>
@@ -230,7 +233,7 @@
         let post = $(`#post-${idPost}`);
         let totalLike = parseInt(post.text());
         let showImage = $(`#show-image-${idPost}`);
-        let showContent = $(`#show-content-${idPost}`);
+        let showLinkDownload = $(`#wrap-link-${idPost}`);
         $.ajax({
             url: "{{route('likePost')}}",
             method: "POST",
@@ -239,15 +242,20 @@
                 _token: "{{csrf_token()}}",
                 post_id: idPost
             },
-            success: function () {
+            success: function (res) {
                 post.text(++totalLike);
                 let btnLike = $(`#btn-like-${idPost}`);
                 btnLike.attr('style', 'color: chartreuse')
-                showImage.removeClass('d-none')
-                showContent.removeClass('hide-content-post')
+                showLinkDownload.empty().append(
+                    `
+                        Link: <a href="${res.link}}">${res.link}</a>
+
+                    `
+                );
             },
             error: function () {
-                alert('Bạn chỉ có thể like 1 lần !')
+                Swal.fire("Bạn chỉ có thể ấn like 1 lần !");
+
             }
         })
     }
