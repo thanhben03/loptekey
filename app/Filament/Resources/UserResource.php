@@ -24,7 +24,9 @@ class UserResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Forms\Components\TextInput::make('money')
+                    ->label('Tài sản'),
+
             ]);
     }
 
@@ -32,7 +34,15 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('name')
+                    ->label('Name')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('email')
+                    ->label('Email')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('money')
+                    ->label('Tài sản')
+                    ->searchable()
             ])
             ->filters([
                 //
@@ -59,7 +69,7 @@ class UserResource extends Resource
         return [
             'index' => Pages\ListUsers::route('/'),
             'create' => Pages\CreateUser::route('/create'),
-            'edit' => Pages\EditUser::route('/{record}/edit'),
+//            'edit' => Pages\EditUser::route('/{record}/edit'),
         ];
     }
 }

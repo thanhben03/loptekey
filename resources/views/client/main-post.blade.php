@@ -1,7 +1,7 @@
 
 @extends('layouts.post')
 @section('content')
-    <div class="main-content right-chat-active" style="background-image: url({{asset('images/background.jpg')}})">
+    <div class="main-content right-chat-active" style="background-image: url({{asset('images/background2.png')}})">
 
         <div class="middle-sidebar-bottom" >
             <div class="middle-sidebar-left">
