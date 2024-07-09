@@ -2,6 +2,26 @@
 
 @extends('layouts.post')
 @section('content')
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="main-content right-chat-active" style="background-image: url({{asset('images/background2.png')}})">
 
         <div class="middle-sidebar-bottom" >
@@ -207,17 +227,17 @@
             // Get the modal
             var modal = document.getElementById("myModal");
 
-// Get the image and insert it inside the modal - use its "alt" text as a caption
+            // Get the image and insert it inside the modal - use its "alt" text as a caption
             var img = document.getElementById("image-post-"+idImage);
             var modalImg = document.getElementById("img01");
             modal.style.display = "block";
             modalImg.src = img.src;
 
 
-// Get the <span> element that closes the modal
+            // Get the <span> element that closes the modal
             var span = document.getElementsByClassName("close")[0];
 
-// When the user clicks on <span> (x), close the modal
+            // When the user clicks on <span> (x), close the modal
             span.onclick = function() {
                 modal.style.display = "none";
             }
