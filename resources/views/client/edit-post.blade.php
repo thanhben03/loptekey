@@ -57,14 +57,22 @@
                                                 <option {{$game->name == $post->tag_name ? 'selected' : ''}} value="{{$game->name}}">{{$game->name}}</option>
                                             @endforeach
                                             @foreach($movies as $movie)
-                                                    <option {{$movie->title == $post->tag_name ? 'selected' : ''}} value="{{$movie->name}}">{{$movie->title}}</option>
+                                                    <option {{$movie->title == $post->tag_name ? 'selected' : ''}} value="{{$movie->title}}">{{$movie->title}}</option>
                                             @endforeach
                                         </select>
                                     </div>
                                 </div>
                         </div>
                     </div>
-
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="header-title mb-3">Link</h4>
+                            <div class="row mb-3">
+                                <label for="inputEmail3" class="col-sm-3 col-form-label">Link</label>
+                                <input type="text" value="{{$post->link}}" name="link" class="form-control" placeholder="Liên kết tải xuống">
+                            </div>
+                        </div>
+                    </div>
                     <div class="card">
                         <div class="card-body">
                             <h4 class="header-title mb-3">Lưu ý</h4>
@@ -77,20 +85,20 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="header-title mb-3">Upload ảnh</h4>
-                            <div class="row mb-3">
-                                <input onchange="showPreviewImage()" class="form-control" type="file" id="fileInput" name="files[]" multiple accept="image/*,video/*"/>
-                            </div>
-                            <div id="preview-image" style="display: flex; flex-wrap: wrap">
-                                @foreach($post->images as $image)
+{{--                    <div class="card">--}}
+{{--                        <div class="card-body">--}}
+{{--                            <h4 class="header-title mb-3">Upload ảnh</h4>--}}
+{{--                            <div class="row mb-3">--}}
+{{--                                <input onchange="showPreviewImage()" class="form-control" type="file" id="fileInput" name="files[]" multiple accept="image/*,video/*"/>--}}
+{{--                            </div>--}}
+{{--                            <div id="preview-image" style="display: flex; flex-wrap: wrap">--}}
+{{--                                @foreach($post->images as $image)--}}
 
-                                    <image style="width: 100px; margin-right: 5px" src="{{$image->path}}"></image>
-                                @endforeach
-                            </div>
-                        </div>
-                    </div>
+{{--                                    <image style="width: 100px; margin-right: 5px" src="{{$image->path}}"></image>--}}
+{{--                                @endforeach--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
                 </div>
 
 

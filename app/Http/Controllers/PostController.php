@@ -180,7 +180,8 @@ class PostController extends Controller
                 'title' => 'required|max:100',
                 'slug' => 'nullable',
                 'content' => 'required:max:1000',
-                'tag_name' => 'required'
+                'tag_name' => 'required',
+                'link' => 'nullable'
             ]);
             $inserts = [];
             if($request->hasfile('files'))
@@ -210,8 +211,9 @@ class PostController extends Controller
                 ->where('post_id', $id)
                 ->firstOrFail()
                 ->post;
-
+            $post->status = 0;
             $post->fill($data);
+
             $post->save();
             DB::commit();
             return redirect()->back()->with('msg', 'Cập nhật bài viết thành công ! Hãy chờ admin phê duyệt.');
