@@ -71,7 +71,7 @@
                     </a>
                 </li>
                 <li class="menu-item">
-                    <a href="{{route('charge')}}" class="menu-link waves-effect waves-light">
+                    <a href="{{route('reward')}}" class="menu-link waves-effect waves-light">
                         <span class="menu-icon"><i class="fas fa-th-large"></i></span>
                         <span class="menu-text">Tổng thưởng</span>
                     </a>
