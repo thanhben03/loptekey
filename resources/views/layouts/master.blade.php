@@ -70,7 +70,12 @@
                         <span class="menu-text">Nạp tiền</span>
                     </a>
                 </li>
-
+                <li class="menu-item">
+                    <a href="{{route('charge')}}" class="menu-link waves-effect waves-light">
+                        <span class="menu-icon"><i class="fas fa-th-large"></i></span>
+                        <span class="menu-text">Tổng thưởng</span>
+                    </a>
+                </li>
                 <li class="menu-item">
                     <a href="#menuIcons" data-bs-toggle="collapse" class="menu-link waves-effect waves-light">
                         <span class="menu-icon"><i class="bx bx-book"></i></span>
