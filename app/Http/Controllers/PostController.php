@@ -13,9 +13,11 @@ use App\Models\UserPost;
 use App\Supports\Eloquent\Sluggable;
 use Doctrine\DBAL\Driver\OCI8\Exception\Error;
 use Illuminate\Http\Request;
+use Illuminate\Log\Logger;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 class PostController extends Controller
@@ -230,5 +232,11 @@ class PostController extends Controller
         $myPost->post->delete();
 
         return redirect()->back();
+    }
+
+    public function test()
+    {
+        $posts = Post::query()->get();
+        dd($posts[1]->users);
     }
 }

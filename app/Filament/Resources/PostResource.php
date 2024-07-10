@@ -25,10 +25,9 @@ class PostResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('oneUser.name')
-                    ->label('User name')
-                ->required(),
+
                 Forms\Components\TextInput::make('title')
+                    ->label()
                     ->required(),
                 Forms\Components\Select::make('status')
                 ->options([
@@ -45,9 +44,12 @@ class PostResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('title')
-                ->label('Tiêu đề')
+                Tables\Columns\TextColumn::make('users.name')
+                ->label('User')
                 ->searchable(),
+                Tables\Columns\TextColumn::make('title')
+                    ->label('Tiêu đề')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                 ->label('Ngày tạo')
                 ->sortable(),

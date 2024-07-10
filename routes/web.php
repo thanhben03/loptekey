@@ -24,6 +24,7 @@ Route::get('/', [HomeController::class, 'home'])->middleware(['auth', 'verified'
 Route::get('/charge', [HomeController::class, 'charge'])->middleware(['auth', 'verified'])->name('charge');
 Route::get('/bai-viet', [PostController::class, 'index'])->name('post');
 Route::get('/quan-ly-bai-dang', [PostController::class, 'managePost'])->name('managePost');
+Route::get('/test', [PostController::class, 'test'])->name('managePost');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

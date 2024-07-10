@@ -12,7 +12,7 @@ class Post extends Model
 
     public function users()
     {
-        return $this->belongsToMany(User::class, 'user_posts', 'user_id', 'id');
+        return $this->belongsToMany(User::class, 'user_posts', 'post_id', 'user_id');
     }
 
     public function like()
@@ -28,7 +28,7 @@ class Post extends Model
 
     public function oneUser()
     {
-        return $this->belongsTo(User::class);
+        return $this->hasOne(User::clas);
     }
 
     public function images()
