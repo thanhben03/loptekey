@@ -4,19 +4,23 @@
 @section('content')
 
     <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="modal-noti" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Thông báo</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    ...
+                    <p>
+                        Bạn phải là thành viên vip mới có thể like
+                    </p>
+                    <p>
+                        Link đăng ký và hướng dẫn: <a href="">Tại đây</a>
+                    </p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
                 </div>
             </div>
         </div>
@@ -79,24 +83,6 @@
                                         <figure class="avatar me-3"><img src="{{$post->user_post[0]->user->avatar}}" alt="image" class="shadow-sm rounded-circle w45"></figure>
                                         <h4 class="fw-700 text-grey-900 font-xssss mt-1">{{$post->user_post[0]->user->name}}<span class="d-block font-xssss fw-500 mt-1 lh-3 text-grey-500">{{$post->updated_at->diffForHumans()}}</span></h4>
                                         <a href="#" class="ms-auto" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false"><i class="ti-more-alt text-grey-900 btn-round-md bg-greylight font-xss"></i></a>
-                                        {{--                                    <div class="dropdown-menu dropdown-menu-end p-4 rounded-xxl border-0 shadow-lg" aria-labelledby="dropdownMenu2">--}}
-                                        {{--                                        <div class="card-body p-0 d-flex">--}}
-                                        {{--                                            <i class="feather-bookmark text-grey-500 me-3 font-lg"></i>--}}
-                                        {{--                                            <h4 class="fw-600 text-grey-900 font-xssss mt-0 me-4">Save Link <span class="d-block font-xsssss fw-500 mt-1 lh-3 text-grey-500">Add this to your saved items</span></h4>--}}
-                                        {{--                                        </div>--}}
-                                        {{--                                        <div class="card-body p-0 d-flex mt-2">--}}
-                                        {{--                                            <i class="feather-alert-circle text-grey-500 me-3 font-lg"></i>--}}
-                                        {{--                                            <h4 class="fw-600 text-grey-900 font-xssss mt-0 me-4">Hide Post <span class="d-block font-xsssss fw-500 mt-1 lh-3 text-grey-500">Save to your saved items</span></h4>--}}
-                                        {{--                                        </div>--}}
-                                        {{--                                        <div class="card-body p-0 d-flex mt-2">--}}
-                                        {{--                                            <i class="feather-alert-octagon text-grey-500 me-3 font-lg"></i>--}}
-                                        {{--                                            <h4 class="fw-600 text-grey-900 font-xssss mt-0 me-4">Hide all from Group <span class="d-block font-xsssss fw-500 mt-1 lh-3 text-grey-500">Save to your saved items</span></h4>--}}
-                                        {{--                                        </div>--}}
-                                        {{--                                        <div class="card-body p-0 d-flex mt-2">--}}
-                                        {{--                                            <i class="feather-lock text-grey-500 me-3 font-lg"></i>--}}
-                                        {{--                                            <h4 class="fw-600 mb-0 text-grey-900 font-xssss mt-0 me-4">Unfollow Group <span class="d-block font-xsssss fw-500 mt-1 lh-3 text-grey-500">Save to your saved items</span></h4>--}}
-                                        {{--                                        </div>--}}
-                                        {{--                                    </div>--}}
                                     </div>
                                     <div id="show-content-{{$post->id}}" class="card-body p-0 me-lg-5 position-relative">
                                         <h3><strong>{{$post->title}}</strong></h3>
@@ -136,7 +122,7 @@
                                     <div class="card-body d-flex p-0 mt-3">
                                         <a href="#" class="emoji-bttn d-flex align-items-center fw-600 text-grey-900 text-dark lh-26 font-xssss me-2">
 
-                                            <a style="color: unset" href="vidu.com" target="_blank">
+                                            <a style="color: unset" onclick="showNoti()" target="_blank">
                                                 <i
                                                     class="feather-thumbs-up me-1 btn-round-xs font-md"
                                                 >
@@ -241,6 +227,12 @@
             span.onclick = function() {
                 modal.style.display = "none";
             }
+        }
+
+        function showNoti() {
+            console.log('123')
+            let modal = $("#modal-noti");
+                modal.modal('show')
         }
     </script>
 @endpush

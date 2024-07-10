@@ -25,8 +25,11 @@ class PostResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('title')
+                Forms\Components\TextInput::make('oneUser.name')
+                    ->label('User name')
                 ->required(),
+                Forms\Components\TextInput::make('title')
+                    ->required(),
                 Forms\Components\Select::make('status')
                 ->options([
                     '1' => 'Phê duyệt',
