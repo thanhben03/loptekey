@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Game;
+use App\Models\Key;
 use App\Models\Movie;
 use App\Models\Order;
 use App\Models\Post;
@@ -19,6 +20,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
+use PharIo\Manifest\License;
 
 class PostController extends Controller
 {
@@ -55,9 +57,10 @@ class PostController extends Controller
                 'user_id' => Auth::user()->id,
                 'post_id' => $post->id
             ]);
-        } catch (\Throwable $e) {
-            dd($e->getMessage());
-    }
+        }
+        catch (\Throwable $e) {
+
+        }
 
         return redirect()->back()->with('msg', 'Created Success !');
     }
@@ -67,11 +70,23 @@ class PostController extends Controller
         $user = Auth::user();
         $now = Carbon::now();
         $currMonth = $now->month;
-        $trans = Order::query()
-            ->whereMonth('created_at', $currMonth)
-            ->where('user_id', '=', $user->id)
-            ->first();
-        return !!$trans;
+
+        $keyIds = Order::query()
+            ->where('user_id', \auth()->user()->id)
+            ->get()
+            ->pluck('key_id');
+
+        $check = Key::query()
+            ->whereIn('id', $keyIds)
+            ->whereNotNull('session_id')
+            ->where('expired', '>=', $now)
+            ->firstOrFail();
+
+//        $trans = Key::query()
+//            ->whereMonth('created_at', $currMonth)
+//            ->where('user_id', '=', $user->id)
+//            ->first();
+        return !!$check;
 
     }
 
