@@ -27,7 +27,6 @@ class PostResource extends Resource
             ->schema([
 
                 Forms\Components\TextInput::make('title')
-                    ->label()
                     ->required(),
                 Forms\Components\Select::make('status')
                 ->options([
