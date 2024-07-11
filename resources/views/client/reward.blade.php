@@ -14,7 +14,7 @@
         </div>
         <!-- end page title -->
         <div class="row">
-            <div class="col-6">
+            <div class="col-md-6">
                 <h2>Bảng xếp hạng</h2>
                 <div class="">
                     <table class="table">
@@ -44,7 +44,7 @@
 
                 </div>
             </div>
-            <div class="col-6">
+            <div class="col-md-6">
                 <h3>Lưu ý</h3>
                 <div class="">
                     <p>
