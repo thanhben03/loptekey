@@ -59,7 +59,7 @@ class PostController extends Controller
             ]);
         }
         catch (\Throwable $e) {
-
+            return redirect()->back()->with('msg', $e->getMessage());
         }
 
         return redirect()->back()->with('msg', 'Created Success !');
