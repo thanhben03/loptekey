@@ -34,7 +34,8 @@ class PostResource extends Resource
                     '0' => 'Từ chối',
                 ]),
                 Forms\Components\RichEditor::make('content')
-                ->label('Content')
+                ->label('Content'),
+                Forms\Components\TextInput::make('link')
 
             ]);
     }
@@ -48,15 +49,16 @@ class PostResource extends Resource
                 ->searchable(),
                 Tables\Columns\TextColumn::make('title')
                     ->label('Tiêu đề')
+                    ->limit(20)
                     ->searchable(),
+                Tables\Columns\SelectColumn::make('status')
+                    ->options([
+                        '0' => 'Từ chối',
+                        '1' => 'Phê duyệt'
+                    ]),
                 Tables\Columns\TextColumn::make('created_at')
                 ->label('Ngày tạo')
-                ->sortable(),
-                Tables\Columns\SelectColumn::make('status')
-                ->options([
-                    '0' => 'Từ chối',
-                    '1' => 'Phê duyệt'
-                ])
+                ->sortable()
 
             ])->defaultSort('updated_at', 'desc')
             ->filters([
