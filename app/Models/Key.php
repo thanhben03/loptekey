@@ -10,6 +10,9 @@ class Key extends Model
 {
     use HasFactory;
     protected $guarded = [];
+    protected $appends = [
+        'remaining_days'
+    ];
 
     protected $dates = [
         'expired', // đảm bảo rằng cột này được xử lý như một đối tượng Carbon
@@ -24,10 +27,14 @@ class Key extends Model
     {
         $today = Carbon::now();
         // Lấy ngày dự kiến bắt đầu
-        $startDate = Carbon::parse($this->expired)->addDays(1);
+        $expired = Carbon::parse($this->expired);
 
         // Tính toán số ngày còn lại
-        $diffDays = $startDate->diffInDays($today);
+        $diffDays = $today->diffInDays($expired, false) + 1;
+
+        if ($expired->toDateString() == $today->toDateString()) {
+            return "Hôm nay";
+        }
         if ($diffDays == 0) {
             return "Hết hạn";
         }
