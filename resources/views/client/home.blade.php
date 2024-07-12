@@ -65,9 +65,9 @@
                                                     <td>{{$item->key->keyType->name_type}}</td>
                                                     <td>{{$item->key->keyType->price}}</td>
                                                     <td>
-                                                        @if($item->key->status == 2)
+                                                        @if($item->key->status == 3)
                                                             Đã kích hoạt
-                                                        @else 
+                                                        @else
                                                             Chưa kích hoạt
                                                         @endif
                                                     </td>

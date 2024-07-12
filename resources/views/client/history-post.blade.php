@@ -16,9 +16,9 @@
                                 <thead>
                                 <tr>
                                     <th >Title</th>
-                                    <th >Tag</th>
                                     <th >Created At</th>
                                     <th>Status</th>
+                                    <th>Like</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
@@ -26,8 +26,7 @@
                                 @foreach($posts as $item)
                                     <tr class="odd">
                                         <td class="dtr-control sorting_1" tabindex="0">{{$item->post->title}}</td>
-                                        <td>{{$item->post->tag_name}}</td>
-                                        <td>{{$item->post->created_at}}</td>
+                                        <td>{{$item->post->updated_at}}</td>
                                         <td>
                                             @if($item->post->status)
                                                 Đã duyệt
@@ -35,6 +34,7 @@
                                                 Chờ duyệt
                                             @endif
                                         </td>
+                                        <td>{{$item->post->like->count()}}</td>
                                         <td>
                                             <form action="{{route('posts.delete', $item->post->id)}}" method="POST">
                                                 @csrf

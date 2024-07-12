@@ -17,7 +17,7 @@
             <div class="col-6">
                 <h2>Nạp tiền</h2>
                 <div class="">
-                    <button class="btn btn-info" id="btn-charge">
+                    <button onclick="showModal()" class="btn btn-info" id="btn-charge">
                         Liên hệ
                     </button>
                 </div>
@@ -89,6 +89,10 @@
 
     <script>
         $(function () {
+            showModal()
+        })
+        $("#basic-datatable").DataTable()
+        function showModal() {
             Swal.fire({
                 title: "Thông báo !",
                 html: `
@@ -104,9 +108,7 @@
                 cancelButtonColor: "#d33",
                 confirmButtonText: "OK"
             })
-        })
-        $("#basic-datatable").DataTable()
-
+        }
         async function charge() {
             const confrim = await Swal.fire({
                 title: "Nhắc nhở !",

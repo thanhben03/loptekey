@@ -246,12 +246,13 @@
                 post.text(++totalLike);
                 let btnLike = $(`#btn-like-${idPost}`);
                 btnLike.attr('style', 'color: chartreuse')
-                showLinkDownload.empty().append(
-                    `
-                        Link: <a href="${res.link}}">${res.link}</a>
-
-                    `
-                );
+                // showLinkDownload.empty().append(
+                //     `
+                //         Link: <a href="${res.link}}">${res.link}</a>
+                //
+                //     `
+                // );
+                window.location.reload()
             },
             error: function () {
                 Swal.fire("Bạn chỉ có thể ấn like 1 lần !");

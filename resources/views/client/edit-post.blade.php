@@ -46,6 +46,7 @@
                 <!-- end col -->
 
                 <div class="col-lg-6">
+                    <!--
                     <div class="card">
                         <div class="card-body">
                             <h4 class="header-title mb-3">Tag</h4>
@@ -64,12 +65,28 @@
                                 </div>
                         </div>
                     </div>
+                    -->
                     <div class="card">
                         <div class="card-body">
                             <h4 class="header-title mb-3">Link</h4>
-                            <div class="row mb-3">
-                                <label for="inputEmail3" class="col-sm-3 col-form-label">Link</label>
-                                <input type="text" value="{{$post->link}}" name="link" class="form-control" placeholder="Liên kết tải xuống">
+                            <span class="btn btn-primary mb-2" onclick="addLink()">
+                                Thêm
+                            </span>
+                            <div class="row mb-3 wrap-link-download">
+                                @php $i = 1 @endphp
+                                @foreach($post->links as $link)
+                                    <div @if($i != 1) style="margin-top: 25px" @endif class="item-link-download d-flex" id="item-link-{{$i}}">
+                                        <div class="col-md-6 d-inline-block">
+                                            <input type="text" value="{{$link->name_link}}" name="name_link[]" class="form-control" placeholder="Văn bản hiển thị">
+                                        </div>
+                                        <div class="col-md-6 d-inline-block position-relative">
+                                            <input value="{{$link->link}}" type="text" name="link[]" class="form-control" placeholder="Liên kết tải xuống">
+                                            <i class="fas fa-minus-circle icon-delete-item-link" onclick="deleteLink({{$i}})"></i>
+
+                                        </div>
+                                    </div>
+                                    @php $i = $i+1 @endphp
+                                @endforeach
                             </div>
                         </div>
                     </div>
@@ -110,7 +127,25 @@
 
 @push('custom-js')
     <script>
+        let index = {{count($post->links)}};
+        function addLink() {
+            let html = `<div class="item-link-download d-flex" style="margin-top: 25px" id="item-link-${index}">
+                                    <div class="col-md-6 d-inline-block">
+                                        <input type="text" name="name_link[]" class="form-control" placeholder="Văn bản hiển thị">
+                                    </div>
+                                    <div class="col-md-6 d-inline-block position-relative">
+                                        <input type="text" name="link[]" class="form-control" placeholder="Liên kết tải xuống">
+                                        <i class="fas fa-minus-circle icon-delete-item-link" onclick="deleteLink(${index})"></i>
 
+                                    </div>
+                                </div>`;
+            $(".wrap-link-download").append(html);
+            index++;
+        }
+
+        function deleteLink(index) {
+            $("#item-link-" + index).remove();
+        }
         function showPreviewImage() {
             const fileInput = document.getElementById("fileInput");
             const selectedFiles = fileInput.files;

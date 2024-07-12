@@ -74,7 +74,11 @@
                                             @if(!in_array(request()->ip(), array_column($post->like->toArray(), "ip")))
                                                 <span style="background: aquamarine;">Bạn phải ấn like để thấy link download !</span>
                                             @else
-                                                <a href="{{$post->link}}">{{$post->link}}</a>
+                                                <div class="d-flex flex-column">
+                                                    @foreach($post->links as $links)
+                                                        <a href="{{$links->link}}">{{$links->name_link}}</a>
+                                                    @endforeach
+                                                </div>
                                             @endif
                                         </div>
                                         </p>

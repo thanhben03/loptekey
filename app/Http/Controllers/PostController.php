@@ -26,6 +26,8 @@ class PostController extends Controller
 {
     public function index()
     {
+
+
         $games = Game::all();
         $movies = Movie::all();
         $user = Auth::user();
@@ -48,10 +50,19 @@ class PostController extends Controller
                 'title' => 'required|max:100',
                 'slug' => 'nullable',
                 'content' => 'required|max:1000',
-                'tag_name' => 'required',
+                'tag_name' => 'nullable',
+                'name_link' => 'nullable',
                 'link' => 'nullable',
             ]);
-
+            $link = [];
+            for ($i = 0; $i < count($data['name_link']); $i++) {
+                $link[] = [
+                    'name_link' => $data['name_link'][$i],
+                    'link' => $data['link'][$i],
+                ];
+            }
+            $data['link'] = json_encode($link);
+            unset($data['name_link']);
             $post = Post::query()->create($data);
             UserPost::query()->create([
                 'user_id' => Auth::user()->id,
@@ -195,9 +206,23 @@ class PostController extends Controller
                 'title' => 'required|max:100',
                 'slug' => 'nullable',
                 'content' => 'required:max:1000',
-                'tag_name' => 'required',
-                'link' => 'nullable'
+                'tag_name' => 'nullable',
+                'name_link' => 'nullable',
+                'link' => 'nullable',
             ]);
+            $link = [];
+            for ($i = 0; $i < count($data['name_link']); $i++) {
+                if ($data['name_link'][$i] != '') {
+                    $link[] = [
+                        'name_link' => $data['name_link'][$i],
+                        'link' => $data['link'][$i],
+                    ];
+                }
+
+            }
+            $data['link'] = json_encode($link);
+            unset($data['name_link']);
+
             $inserts = [];
             if($request->hasfile('files'))
             {

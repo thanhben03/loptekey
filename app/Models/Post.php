@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Attribute;
+use Illuminate\Database\Eloquent\Casts\AsCollection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -9,6 +11,9 @@ class Post extends Model
 {
     use HasFactory;
     protected $guarded = [];
+    protected $appends = ['links'];
+
+
 
     public function users()
     {
@@ -44,5 +49,9 @@ class Post extends Model
     public function scopeActive($query)
     {
         return $query->where('status', 1);
+    }
+    protected function getLinksAttribute()
+    {
+        return json_decode($this->link);
     }
 }

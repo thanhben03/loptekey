@@ -40,6 +40,7 @@
                 <!-- end col -->
 
                 <div class="col-lg-6">
+                    <!--
                     <div class="card">
                         <div class="card-body">
                             <h4 class="header-title mb-3">Tag</h4>
@@ -58,12 +59,24 @@
                             </div>
                         </div>
                     </div>
+                    -->
                     <div class="card">
                         <div class="card-body">
                             <h4 class="header-title mb-3">Link</h4>
-                            <div class="row mb-3">
-                                <label for="inputEmail3" class="col-sm-3 col-form-label">Link</label>
-                                <input type="text" name="link" class="form-control" placeholder="Liên kết tải xuống">
+                            <span class="btn btn-primary mb-2" onclick="addLink()">
+                                Thêm
+                            </span>
+                            <div class="row mb-3 wrap-link-download">
+                                <div class="item-link-download d-flex" id="item-link-1">
+                                    <div class="col-md-6 d-inline-block">
+                                        <input type="text" name="name_link[]" class="form-control" placeholder="Văn bản hiển thị">
+                                    </div>
+                                    <div class="col-md-6 d-inline-block position-relative">
+                                        <input type="text" name="link[]" class="form-control" placeholder="Liên kết tải xuống">
+                                        <i class="fas fa-minus-circle icon-delete-item-link" onclick="deleteLink(1)"></i>
+
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -89,9 +102,7 @@
 
 @push('custom-js')
     <script>
-        function test() {
-            console.log($("#choose-tag").val());
-        }
+        let index = 2;
         $(document).ready(function() {
             $("#history-post-datatable").DataTable({
                 order: [
@@ -173,6 +184,24 @@
 
         }
 
+        function addLink() {
+            let html = `<div class="item-link-download d-flex" style="margin-top: 25px" id="item-link-${index}">
+                                    <div class="col-md-6 d-inline-block">
+                                        <input type="text" name="name_link[]" class="form-control" placeholder="Văn bản hiển thị">
+                                    </div>
+                                    <div class="col-md-6 d-inline-block position-relative">
+                                        <input type="text" name="link[]" class="form-control" placeholder="Liên kết tải xuống">
+                                        <i class="fas fa-minus-circle icon-delete-item-link" onclick="deleteLink(${index})"></i>
+
+                                    </div>
+                                </div>`;
+            $(".wrap-link-download").append(html);
+            index++;
+        }
+
+        function deleteLink(index) {
+            $("#item-link-" + index).remove();
+        }
 
         async function buyKey() {
             const confrim = await Swal.fire({

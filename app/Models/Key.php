@@ -24,7 +24,7 @@ class Key extends Model
     {
         $today = Carbon::now();
         // Lấy ngày dự kiến bắt đầu
-        $startDate = Carbon::parse($this->expired);
+        $startDate = Carbon::parse($this->expired)->addDays(1);
 
         // Tính toán số ngày còn lại
         $diffDays = $startDate->diffInDays($today);

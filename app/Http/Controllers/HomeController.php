@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Key;
 use App\Models\KeyType;
 use App\Models\Order;
 use App\Models\PostLike;
@@ -16,8 +17,30 @@ use Illuminate\Support\Number;
 
 class HomeController extends Controller
 {
+    public function __construct()
+    {
+        $now = Carbon::now();
+        $month = $now->month;
+        $year = $now->year;
+        $this->middleware(function ($request, $next) use ($now){
+            $keyIds = Order::query()
+            ->where('user_id', \auth()->user()->id)
+            ->get()
+            ->pluck('key_id');
+
+            $isTick = Key::query()
+                ->whereIn('id', $keyIds)
+                ->where('expired', '>=', $now)
+                ->first();
+            view()->share('isTick', !!$isTick);
+            return $next($request);
+        });
+
+    }
+
     public function home()
     {
+
         $keyType = KeyType::query()->get();
         $historyBuy = Order::query()->where('user_id', Auth::user()->id)->get();
         return view('client.home', compact('keyType', 'historyBuy'));
