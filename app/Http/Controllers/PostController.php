@@ -24,6 +24,25 @@ use PharIo\Manifest\License;
 
 class PostController extends Controller
 {
+    public function __construct()
+    {
+        $now = Carbon::now();
+        $month = $now->month;
+        $year = $now->year;
+        $this->middleware(function ($request, $next) use ($now, $month, $year) {
+            $keyIds = Order::query()
+                ->where('user_id', \auth()->user()->id)
+                ->get()
+                ->pluck('key_id');
+
+            $isTick = Key::query()
+                ->whereIn('id', $keyIds)
+                ->whereDate('expired', '>=', $now)
+                ->first();
+            view()->share('isTick', !!$isTick);
+            return $next($request);
+        });
+    }
     public function index()
     {
 

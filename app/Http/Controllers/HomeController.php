@@ -30,8 +30,7 @@ class HomeController extends Controller
 
             $isTick = Key::query()
                 ->whereIn('id', $keyIds)
-                ->whereMonth('expired', '>=', $month)
-                ->whereYear('expired', '>=', $year)
+                ->whereDate('expired', '>=', $now)
                 ->first();
             view()->share('isTick', !!$isTick);
             return $next($request);
