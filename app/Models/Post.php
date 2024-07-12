@@ -52,6 +52,6 @@ class Post extends Model
     }
     protected function getLinksAttribute()
     {
-        return json_decode($this->link);
+        return json_decode($this->link) ?? [];
     }
 }

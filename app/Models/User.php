@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -45,8 +46,25 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    protected $appends = [
+        'status_buy_key'
+    ];
+
     public function posts()
     {
         return $this->belongsToMany(Post::class, 'user_posts', 'user_id', 'post_id');
+    }
+
+    public function getStatusBuyKeyAttribute()
+    {
+        $user_id = $this->id;
+
+        $keyIds = Order::query()->where('user_id', $user_id)->get()->pluck('key_id');
+        $keys = Key::query()
+            ->whereIn('id', $keyIds)
+            ->where('expired', '>=', Carbon::now()->toDateString())
+            ->get();
+        $status = !!$keys->count() ? 'VIP' : 'Normal';
+        return $status;
     }
 }

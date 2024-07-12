@@ -42,6 +42,16 @@ class UserResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('money')
                     ->label('Tài sản')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('status_buy_key')
+                    ->label('Trạng thái')
+                    ->badge()
+                    ->color(function ($state) {
+                        if ($state == 'VIP') {
+                            return 'primary';
+                        }
+                        return 'info';
+                    })
                     ->searchable()
             ])
             ->filters([
