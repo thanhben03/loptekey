@@ -45,7 +45,6 @@
 </head>
 
 <body>
-<h1>AHIHI {{$isTick}}</h1>
 <!-- Begin page -->
 <div class="layout-wrapper">
 
