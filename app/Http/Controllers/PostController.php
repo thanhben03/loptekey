@@ -29,8 +29,9 @@ class PostController extends Controller
         $now = Carbon::now();
         $month = $now->month;
         $year = $now->year;
-        if (Auth::check()) {
-            $this->middleware(function ($request, $next) use ($now, $month, $year) {
+        $this->middleware(function ($request, $next) use ($now, $month, $year) {
+            $isTick = false;
+            if (Auth::check()) {
                 $keyIds = Order::query()
                     ->where('user_id', \auth()->user()->id)
                     ->get()
@@ -40,13 +41,10 @@ class PostController extends Controller
                     ->whereIn('id', $keyIds)
                     ->whereDate('expired', '>=', $now)
                     ->first();
-                view()->share('isTick', !!$isTick);
-                return $next($request);
-            });
-        } else {
-            view()->share('isTick', false);
-
-        }
+            }
+            view()->share('isTick', !!$isTick);
+            return $next($request);
+        });
     }
     public function index()
     {
