@@ -105,9 +105,9 @@
         let index = 2;
         $(document).ready(function() {
             $("#history-post-datatable").DataTable({
-                order: [
-                    [2, 'desc']
-                ]
+                // order: [
+                //     [2, 'desc']
+                // ]
             })
             let msg = $("#msg").val()
             console.log(msg)
@@ -141,8 +141,8 @@
                     e.preventDefault();
 
                 }
-                if (content.val().length > 500) {
-                    alert('Nội dung không được vượt quá 500 ký tự')
+                if (content.val().length > 15000) {
+                    alert('Nội dung quá dài !')
                     e.preventDefault()
 
                 }

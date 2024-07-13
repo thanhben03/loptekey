@@ -25,7 +25,7 @@
                                 <tbody>
                                 @foreach($posts as $item)
                                     <tr class="odd">
-                                        <td class="dtr-control sorting_1" tabindex="0">{{$item->post->title}}</td>
+                                        <td class="" tabindex="0">{{$item->post->title}}</td>
                                         <td>{{$item->post->updated_at}}</td>
                                         <td>
                                             @if($item->post->status)
