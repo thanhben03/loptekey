@@ -16,10 +16,10 @@ class CheckAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::user()->id == 1) {
+        if (Auth::check() && Auth::user()->id == 1) {
             return $next($request);
         }
 
-        return redirect()->route('login');
+        return redirect()->route('home');
     }
 }
