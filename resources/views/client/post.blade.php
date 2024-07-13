@@ -141,7 +141,9 @@
                     e.preventDefault();
 
                 }
-                if (content.val().length > 20000) {
+                console.log(content.val().length)
+                e.preventDefault();
+                if (content.val().length > 10000) {
                     alert('Nội dung quá dài !')
                     e.preventDefault()
 
