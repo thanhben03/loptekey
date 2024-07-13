@@ -22,19 +22,21 @@ class HomeController extends Controller
         $now = Carbon::now();
         $month = $now->month;
         $year = $now->year;
-        $this->middleware(function ($request, $next) use ($now, $month, $year) {
-            $keyIds = Order::query()
-            ->where('user_id', \auth()->user()->id)
-            ->get()
-            ->pluck('key_id');
+        if (Auth::check()) {
+            $this->middleware(function ($request, $next) use ($now, $month, $year) {
+                $keyIds = Order::query()
+                    ->where('user_id', \auth()->user()->id)
+                    ->get()
+                    ->pluck('key_id');
 
-            $isTick = Key::query()
-                ->whereIn('id', $keyIds)
-                ->whereDate('expired', '>=', $now)
-                ->first();
-            view()->share('isTick', !!$isTick);
-            return $next($request);
-        });
+                $isTick = Key::query()
+                    ->whereIn('id', $keyIds)
+                    ->whereDate('expired', '>=', $now)
+                    ->first();
+                view()->share('isTick', !!$isTick);
+                return $next($request);
+            });
+        }
 
     }
 
