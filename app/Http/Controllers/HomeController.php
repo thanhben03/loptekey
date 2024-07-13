@@ -36,6 +36,9 @@ class HomeController extends Controller
                 view()->share('isTick', !!$isTick);
                 return $next($request);
             });
+        } else {
+            view()->share('isTick', false);
+
         }
 
     }
