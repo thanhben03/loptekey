@@ -141,7 +141,7 @@
                     e.preventDefault();
 
                 }
-                if (content.val().length > 15000) {
+                if (content.val().length > 20000) {
                     alert('Nội dung quá dài !')
                     e.preventDefault()
 
