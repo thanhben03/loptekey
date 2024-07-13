@@ -35,7 +35,7 @@ class Key extends Model
         if ($expired->toDateString() == $today->toDateString()) {
             return "Hôm nay";
         }
-        if ($diffDays == 0) {
+        if ($diffDays <= 0) {
             return "Hết hạn";
         }
         // Hiển thị số ngày còn lại
