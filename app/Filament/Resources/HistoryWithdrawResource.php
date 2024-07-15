@@ -19,6 +19,7 @@ class HistoryWithdrawResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
     protected static ?string $navigationGroup = 'Quản Lý Người Dùng';
+    protected static ?string $navigationLabel = 'Lịch sử rút';
 
     public static function form(Form $form): Form
     {
