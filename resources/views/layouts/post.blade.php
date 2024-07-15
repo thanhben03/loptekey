@@ -256,7 +256,7 @@
                 //
                 //     `
                 // );
-                window.location.reload()
+                // window.location.reload()
             },
             error: function () {
                 Swal.fire("Bạn chỉ có thể ấn like 1 lần !");
