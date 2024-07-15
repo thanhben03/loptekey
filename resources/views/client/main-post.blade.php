@@ -85,7 +85,7 @@
 {{--                                                @foreach($post->links as $links)--}}
 {{--                                                    <a href="{{$links->link}}">{{$links->name_link}}</a>--}}
 {{--                                                @endforeach--}}
-                                                {{!! $post->hide_content !!}}
+                                                {!! $post->hide_content !!}
 
                                             </div>
                                         </div>

@@ -60,26 +60,26 @@
                         </div>
                     </div>
                     -->
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="header-title mb-3">Link</h4>
-                            <span class="btn btn-primary mb-2" onclick="addLink()">
-                                Thêm
-                            </span>
-                            <div class="row mb-3 wrap-link-download">
-                                <div class="item-link-download d-flex" id="item-link-1">
-                                    <div class="col-md-6 d-inline-block">
-                                        <input type="text" name="name_link[]" class="form-control" placeholder="Văn bản hiển thị">
-                                    </div>
-                                    <div class="col-md-6 d-inline-block position-relative">
-                                        <input type="text" name="link[]" class="form-control" placeholder="Liên kết tải xuống">
-                                        <i class="fas fa-minus-circle icon-delete-item-link" onclick="deleteLink(1)"></i>
+{{--                    <div class="card">--}}
+{{--                        <div class="card-body">--}}
+{{--                            <h4 class="header-title mb-3">Link</h4>--}}
+{{--                            <span class="btn btn-primary mb-2" onclick="addLink()">--}}
+{{--                                Thêm--}}
+{{--                            </span>--}}
+{{--                            <div class="row mb-3 wrap-link-download">--}}
+{{--                                <div class="item-link-download d-flex" id="item-link-1">--}}
+{{--                                    <div class="col-md-6 d-inline-block">--}}
+{{--                                        <input type="text" name="name_link[]" class="form-control" placeholder="Văn bản hiển thị">--}}
+{{--                                    </div>--}}
+{{--                                    <div class="col-md-6 d-inline-block position-relative">--}}
+{{--                                        <input type="text" name="link[]" class="form-control" placeholder="Liên kết tải xuống">--}}
+{{--                                        <i class="fas fa-minus-circle icon-delete-item-link" onclick="deleteLink(1)"></i>--}}
 
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
                     <div class="card">
                         <div class="card-body">
                             <h4 class="header-title mb-3">Nội dung ẩn</h4>
