@@ -137,14 +137,7 @@ class PostController extends Controller
             ->whereYear('apply_date', now()->year)
             ->first();
         $fromUser = '';
-        foreach ($posts as $post) {
-            $likes = [];
-            foreach ($post->like as $like) {
-                $likes[] = $like->ip;
-            }
 
-            $post->like = $likes;
-        }
 
         if ($request->query('user_id')) {
             $fromUser = User::query()->where('id', $request->query('user_id'))->first()->name;
@@ -157,7 +150,14 @@ class PostController extends Controller
                 ->orderBy('updated_at', 'desc')
                 ->get();
         }
+        foreach ($posts as $post) {
+            $likes = [];
+            foreach ($post->like as $like) {
+                $likes[] = $like->ip;
+            }
 
+            $post->like = $likes;
+        }
 
         $user = Auth::user();
         $now = Carbon::now();
