@@ -110,6 +110,13 @@
                                                         @php
                                                             break;
                                                         @endphp
+                                                    @else
+                                                        <i
+                                                            onclick="likePost({{$post->id}})"
+                                                            class="feather-thumbs-up me-1 btn-round-xs font-md"
+                                                            id="btn-like-{{$post->id}}"
+                                                        >
+                                                        </i>
                                                     @endif
                                                 @endforeach
                                             @else
