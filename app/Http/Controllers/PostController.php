@@ -9,6 +9,7 @@ use App\Models\Order;
 use App\Models\Post;
 use App\Models\PostImage;
 use App\Models\PostLike;
+use App\Models\TotalReward;
 use App\Models\User;
 use App\Models\UserPost;
 use App\Supports\Eloquent\Sluggable;
@@ -131,6 +132,10 @@ class PostController extends Controller
                 ->active()
                 ->orderBy('updated_at', 'desc')
                 ->get();
+        $totalReward = TotalReward::query()
+            ->whereMonth('apply_date', now()->month)
+            ->whereYear('apply_date', now()->year)
+            ->first();
         $fromUser = '';
         foreach ($posts as $post) {
             $likes = [];
@@ -165,7 +170,7 @@ class PostController extends Controller
             ->groupBy('post_id')
             ->orderBy('like_count', 'desc')
             ->get();
-        return view('client.main-post', compact('posts', 'user', 'tops', 'fromUser'));
+        return view('client.main-post', compact('totalReward','posts', 'user', 'tops', 'fromUser'));
     }
 
     public function hidePost()

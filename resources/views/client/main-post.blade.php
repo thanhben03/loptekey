@@ -48,7 +48,7 @@
                     </div>
                     <div class="col-xl-8">
                         <div class="alert alert-success">
-                            Tổng thưởng của tháng này là: 500.000đ
+                            Tổng thưởng của tháng này là: {{\Illuminate\Support\Number::currency($totalReward->total_reward ?? 0, 'VND') ?? '0đ'}}
                         </div>
                         <div class="alert alert-info @if($fromUser == '') d-none @endif">
                             Bạn đang xem bài viết của {{$fromUser}} <a href="{{route('mainPost')}}">Quay lại</a>

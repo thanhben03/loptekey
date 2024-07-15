@@ -35,7 +35,9 @@ class PostResource extends Resource
                 ]),
                 Forms\Components\RichEditor::make('content')
                 ->label('Content'),
-                Forms\Components\TextInput::make('link')
+                Forms\Components\RichEditor::make('hide_content')
+                    ->label('Hide Content'),
+//                Forms\Components\TextInput::make('link')
 
             ]);
     }
