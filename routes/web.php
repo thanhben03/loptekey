@@ -23,6 +23,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'home'])->middleware(['auth', 'verified'])->name('home');
 Route::get('/charge', [HomeController::class, 'charge'])->middleware(['auth', 'verified'])->name('charge');
 Route::get('/reward', [HomeController::class, 'reward'])->middleware(['auth'])->name('reward');
+Route::get('/withdraw', [HomeController::class, 'withdraw'])->middleware(['auth'])->name('withdraw');
+Route::post('/process-withdraw', [HomeController::class, 'processWithdraw'])->middleware(['auth'])->name('processWithdraw');
 Route::get('/bai-viet', [PostController::class, 'index'])->name('post');
 Route::get('/quan-ly-bai-dang', [PostController::class, 'managePost'])->name('managePost');
 Route::get('/get-reward', [HomeController::class, 'sendMoneyAward'])->name('sendMoneyAward');

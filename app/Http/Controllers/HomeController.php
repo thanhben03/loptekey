@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\HistoryWithdraw;
 use App\Models\Key;
 use App\Models\KeyType;
 use App\Models\Order;
@@ -14,6 +15,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Number;
+use PHPUnit\Event\Code\Throwable;
 
 class HomeController extends Controller
 {
@@ -168,6 +170,51 @@ class HomeController extends Controller
             'created_at' => Carbon::now(),
         ]);
         return redirect()->route('reward')->with('msg', 'Success !');
+
+    }
+
+    public function withdraw()
+    {
+        $histories = HistoryWithdraw::query()->orderBy('updated_at', 'DESC')->get();
+        return view('client.withdraw', compact('histories'));
+    }
+
+    public function processWithdraw(Request $request)
+    {
+        try {
+            DB::beginTransaction();
+            $amount = $request->amount;
+
+            $min = 20000;
+            $myMoney = Auth::user()->money;
+
+            if ($amount < $min) {
+                throw new \Error('Số tiền phải lớn hơn '.$min);
+            }
+
+            if ($myMoney < $amount) {
+                throw new \Error('Số dư không đủ !');
+
+            }
+
+            HistoryWithdraw::query()->create([
+                'user_id' => \auth()->user()->id,
+                'bank_name' => $request->bank_name,
+                'stk' => $request->stk,
+                'fullname' => $request->fullname,
+                'money' => $amount
+            ]);
+
+            \auth()->user()->update([
+                'money' => $myMoney - $amount
+            ]);
+            DB::commit();
+            return redirect()->back()->with('msg', 'Success !');
+        } catch (\Throwable $e) {
+            DB::rollBack();
+            return redirect()->back()->with('msg', $e->getMessage());
+        }
+
 
     }
 }
