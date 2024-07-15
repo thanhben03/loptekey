@@ -71,7 +71,7 @@ class PostController extends Controller
             $data = $request->validate([
                 'title' => 'required|max:100',
                 'slug' => 'nullable',
-                'content' => 'required|max:1000',
+                'content' => 'required|max:20000',
                 'tag_name' => 'nullable',
                 'name_link' => 'nullable',
                 'link' => 'nullable',
