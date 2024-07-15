@@ -31,6 +31,10 @@
             height: 25%;
             overflow: hidden;
         }
+        .post-content img {
+            width: 100% !important;
+            height: 100% !important;
+        }
     </style>
     <style>
         /* Style the Image Used to Trigger the Modal */

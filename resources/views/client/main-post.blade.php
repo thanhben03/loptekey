@@ -65,7 +65,7 @@
                                         <h4 class="fw-700 text-grey-900 font-xssss mt-1">{{$post->user_post[0]->user->name}}<span class="d-block font-xssss fw-500 mt-1 lh-3 text-grey-500">{{$post->updated_at->diffForHumans()}}</span></h4>
                                         <a href="#" class="ms-auto" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false"><i class="ti-more-alt text-grey-900 btn-round-md bg-greylight font-xss"></i></a>
                                     </div>
-                                    <div class="card-body p-0 me-lg-5">
+                                    <div class="card-body p-0 me-lg-5 post-content">
                                         <h3><strong>{{$post->title}}</strong></h3>
                                         <p class="fw-500 text-grey-500 lh-26 font-xssss w-100">
                                             {!! $post->content !!}
