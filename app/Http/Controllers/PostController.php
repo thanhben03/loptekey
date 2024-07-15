@@ -242,19 +242,20 @@ class PostController extends Controller
                 'tag_name' => 'nullable',
                 'name_link' => 'nullable',
                 'link' => 'nullable',
+                'hide_content' => 'nullable'
             ]);
-            $link = [];
-            for ($i = 0; $i < count($data['name_link']); $i++) {
-                if ($data['name_link'][$i] != '') {
-                    $link[] = [
-                        'name_link' => $data['name_link'][$i],
-                        'link' => $data['link'][$i],
-                    ];
-                }
-
-            }
-            $data['link'] = json_encode($link);
-            unset($data['name_link']);
+//            $link = [];
+//            for ($i = 0; $i < count($data['name_link']); $i++) {
+//                if ($data['name_link'][$i] != '') {
+//                    $link[] = [
+//                        'name_link' => $data['name_link'][$i],
+//                        'link' => $data['link'][$i],
+//                    ];
+//                }
+//
+//            }
+//            $data['link'] = json_encode($link);
+//            unset($data['name_link']);
 
             $inserts = [];
             if($request->hasfile('files'))

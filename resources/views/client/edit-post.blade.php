@@ -66,27 +66,36 @@
                         </div>
                     </div>
                     -->
+{{--                    <div class="card">--}}
+{{--                        <div class="card-body">--}}
+{{--                            <h4 class="header-title mb-3">Link</h4>--}}
+{{--                            <span class="btn btn-primary mb-2" onclick="addLink()">--}}
+{{--                                Thêm--}}
+{{--                            </span>--}}
+{{--                            <div class="row mb-3 wrap-link-download">--}}
+{{--                                @php $i = 1 @endphp--}}
+{{--                                @foreach($post->links as $link)--}}
+{{--                                    <div @if($i != 1) style="margin-top: 25px" @endif class="item-link-download d-flex" id="item-link-{{$i}}">--}}
+{{--                                        <div class="col-md-6 d-inline-block">--}}
+{{--                                            <input type="text" value="{{$link->name_link}}" name="name_link[]" class="form-control" placeholder="Văn bản hiển thị">--}}
+{{--                                        </div>--}}
+{{--                                        <div class="col-md-6 d-inline-block position-relative">--}}
+{{--                                            <input value="{{$link->link}}" type="text" name="link[]" class="form-control" placeholder="Liên kết tải xuống">--}}
+{{--                                            <i class="fas fa-minus-circle icon-delete-item-link" onclick="deleteLink({{$i}})"></i>--}}
+
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                    @php $i = $i+1 @endphp--}}
+{{--                                @endforeach--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="header-title mb-3">Link</h4>
-                            <span class="btn btn-primary mb-2" onclick="addLink()">
-                                Thêm
-                            </span>
+                            <h4 class="header-title mb-3">Nội dung ẩn</h4>
                             <div class="row mb-3 wrap-link-download">
-                                @php $i = 1 @endphp
-                                @foreach($post->links as $link)
-                                    <div @if($i != 1) style="margin-top: 25px" @endif class="item-link-download d-flex" id="item-link-{{$i}}">
-                                        <div class="col-md-6 d-inline-block">
-                                            <input type="text" value="{{$link->name_link}}" name="name_link[]" class="form-control" placeholder="Văn bản hiển thị">
-                                        </div>
-                                        <div class="col-md-6 d-inline-block position-relative">
-                                            <input value="{{$link->link}}" type="text" name="link[]" class="form-control" placeholder="Liên kết tải xuống">
-                                            <i class="fas fa-minus-circle icon-delete-item-link" onclick="deleteLink({{$i}})"></i>
-
-                                        </div>
-                                    </div>
-                                    @php $i = $i+1 @endphp
-                                @endforeach
+                                <textarea onchange="saveHideContent()" rows="10" type="password" class="form-control" id="hide-content"></textarea>
+                                <input type="text" style="display: none" value="{{$post->hide_content}}" name="hide_content" id="input-hide-content">
                             </div>
                         </div>
                     </div>
@@ -248,9 +257,36 @@
                 console.log(info)
             }
         });
+        const editor2 = SUNEDITOR.create((document.getElementById('hide-content') || 'sample'),{
+            lang: SUNEDITOR_LANG['en'],
+
+            buttonList: [
+                ['undo', 'redo'],
+                ['font', 'fontSize', 'formatBlock'],
+                ['paragraphStyle', 'blockquote'],
+                ['bold', 'underline', 'italic', 'strike', 'subscript', 'superscript'],
+                ['fontColor', 'hiliteColor', 'textStyle'],
+                ['removeFormat'],
+                '/', // Line break
+                ['outdent', 'indent'],
+                ['align', 'horizontalRule', 'list', 'lineHeight'],
+                ['table', 'link', 'image', 'video', 'audio' /** ,'math' */], // You must add the 'katex' library at options to use the 'math' plugin.
+                /** ['imageGallery'] */ // You must add the "imageGalleryUrl".
+                ['fullScreen', 'showBlocks', 'codeView'],
+                ['preview', 'print'],
+                ['save', 'template'],
+                /** ['dir', 'dir_ltr', 'dir_rtl'] */ // "dir": Toggle text direction, "dir_ltr": Right to Left, "dir_rtl": Left to Right
+            ],
+            defaultStyle: 'font-family:arial',
+            width: '100%',
+            callBackSave: function (contents, isChanged) {
+                $("#input-hide-content").val(contents)
+            }
+        });
 
         function init() {
             editor.setContents(document.getElementById('content').value);
+            editor2.setContents(document.getElementById('input-hide-content').value);
         }
         init();
 
@@ -260,7 +296,12 @@
             document.getElementById('content').value = editor.getContents();
 
         }
+        function saveHideContent() {
+            console.log('save')
+            // console.log(editor.getContents())
+            document.getElementById('hide-content').value = editor2.getContents();
 
+        }
 
         async function buyKey() {
             const confrim = await Swal.fire({
