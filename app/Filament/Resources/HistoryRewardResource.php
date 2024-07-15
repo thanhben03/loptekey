@@ -18,12 +18,18 @@ class HistoryRewardResource extends Resource
     protected static ?string $model = HistoryReward::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationGroup = 'Quản Lý Người Dùng';
+    protected static ?string $navigationLabel = 'Lịch sử nhận thưởng';
+
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                //
+                Forms\Components\TextInput::make('reward')
+                ->type('text')
+                ->maxLength(255)
+                ->required()
             ]);
     }
 
@@ -31,7 +37,16 @@ class HistoryRewardResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('user.name')
+                ->searchable()
+                ->sortable(),
+                Tables\Columns\TextColumn::make('reward')
+                ->searchable()
+                ->sortable(),
+                Tables\Columns\TextColumn::make('created_at')
+                ->searchable()
+                    ->date()
+                ->sortable(),
             ])
             ->filters([
                 //
