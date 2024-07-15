@@ -80,6 +80,11 @@
                                                     @endforeach
                                                 </div>
                                             @endif
+                                            <div style="display: none !important;" id="show-content-{{$post->id}}" class="d-flex flex-column">
+                                                @foreach($post->links as $links)
+                                                    <a href="{{$links->link}}">{{$links->name_link}}</a>
+                                                @endforeach
+                                            </div>
                                         </div>
                                         </p>
                                     </div>

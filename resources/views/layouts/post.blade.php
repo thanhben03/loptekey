@@ -250,6 +250,7 @@
                 post.text(++totalLike);
                 let btnLike = $(`#btn-like-${idPost}`);
                 btnLike.attr('style', 'color: chartreuse')
+                $("#show-content-"+idPost).css('display', 'block')
                 // showLinkDownload.empty().append(
                 //     `
                 //         Link: <a href="${res.link}}">${res.link}</a>
