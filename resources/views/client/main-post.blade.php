@@ -69,7 +69,7 @@
                                         <h3><strong>{{$post->title}}</strong></h3>
                                         <p class="fw-500 text-grey-500 lh-26 font-xssss w-100">
                                             {!! $post->content !!}
-                                        <div  class="col-12 @if(!$post->link) d-none @endif" id="wrap-link-{{$post->id}}">
+                                        <div  class="col-12 @if(!$post->content) d-none @endif" id="wrap-link-{{$post->id}}">
                                             Nội dung ẩn:
                                             @if(!in_array(request()->ip(), $post->like))
                                                 <span id="hide-content-{{$post->id}}" style="background: aquamarine;">Bạn phải ấn like để thấy nội dung !</span>
