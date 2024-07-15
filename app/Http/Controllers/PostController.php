@@ -77,15 +77,15 @@ class PostController extends Controller
                 'link' => 'nullable',
                 'hide_content' => 'nullable',
             ]);
-            $link = [];
-            for ($i = 0; $i < count($data['name_link']); $i++) {
-                $link[] = [
-                    'name_link' => $data['name_link'][$i],
-                    'link' => $data['link'][$i],
-                ];
-            }
-            $data['link'] = json_encode($link);
-            unset($data['name_link']);
+//            $link = [];
+//            for ($i = 0; $i < count($data['name_link']); $i++) {
+//                $link[] = [
+//                    'name_link' => $data['name_link'][$i],
+//                    'link' => $data['link'][$i],
+//                ];
+//            }
+//            $data['link'] = json_encode($link);
+//            unset($data['name_link']);
             $post = Post::query()->create($data);
             UserPost::query()->create([
                 'user_id' => Auth::user()->id,
