@@ -70,20 +70,23 @@
                                         <p class="fw-500 text-grey-500 lh-26 font-xssss w-100">
                                             {!! $post->content !!}
                                         <div  class="col-12 @if(!$post->link) d-none @endif" id="wrap-link-{{$post->id}}">
-                                            Link:
+                                            Nội dung ẩn:
                                             @if(!in_array(request()->ip(), $post->like))
-                                                <span style="background: aquamarine;">Bạn phải ấn like để thấy link download !</span>
+                                                <span id="hide-content-{{$post->id}}" style="background: aquamarine;">Bạn phải ấn like để thấy nội dung !</span>
                                             @else
                                                 <div class="d-flex flex-column">
-                                                    @foreach($post->links as $links)
-                                                        <a href="{{$links->link}}">{{$links->name_link}}</a>
-                                                    @endforeach
+{{--                                                    @foreach($post->links as $links)--}}
+{{--                                                        <a href="{{$links->link}}">{{$links->name_link}}</a>--}}
+{{--                                                    @endforeach--}}
+                                                    {!! $post->hide_content !!}
                                                 </div>
                                             @endif
                                             <div style="display: none !important;" id="show-content-{{$post->id}}" class="d-flex flex-column">
-                                                @foreach($post->links as $links)
-                                                    <a href="{{$links->link}}">{{$links->name_link}}</a>
-                                                @endforeach
+{{--                                                @foreach($post->links as $links)--}}
+{{--                                                    <a href="{{$links->link}}">{{$links->name_link}}</a>--}}
+{{--                                                @endforeach--}}
+                                                {{!! $post->hide_content !!}}
+
                                             </div>
                                         </div>
                                         </p>

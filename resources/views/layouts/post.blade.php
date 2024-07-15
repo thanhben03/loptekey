@@ -251,6 +251,7 @@
                 let btnLike = $(`#btn-like-${idPost}`);
                 btnLike.attr('style', 'color: chartreuse')
                 $("#show-content-"+idPost).css('display', 'block')
+                $("#hide-content-"+idPost).css('display', 'none')
                 // showLinkDownload.empty().append(
                 //     `
                 //         Link: <a href="${res.link}}">${res.link}</a>

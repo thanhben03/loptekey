@@ -75,6 +75,7 @@ class PostController extends Controller
                 'tag_name' => 'nullable',
                 'name_link' => 'nullable',
                 'link' => 'nullable',
+                'hide_content' => 'nullable',
             ]);
             $link = [];
             for ($i = 0; $i < count($data['name_link']); $i++) {
@@ -92,6 +93,7 @@ class PostController extends Controller
             ]);
         }
         catch (\Throwable $e) {
+            dd($e->getMessage());
             return redirect()->back()->with('msg', $e->getMessage());
         }
 

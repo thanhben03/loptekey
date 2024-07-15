@@ -82,6 +82,15 @@
                     </div>
                     <div class="card">
                         <div class="card-body">
+                            <h4 class="header-title mb-3">Nội dung ẩn</h4>
+                            <div class="row mb-3 wrap-link-download">
+                                <textarea onchange="saveHideContent()" rows="10" type="password" class="form-control" id="hide-content"></textarea>
+                                <input type="text" style="display: none" name="hide_content" id="input-hide-content">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
                             <h4 class="header-title mb-3">Lưu ý</h4>
                             <div class="row mb-3">
                                 <div class="alert alert-warning">
@@ -176,11 +185,43 @@
                 $("#content").val(contents)
             }
         });
+        const editor2 = SUNEDITOR.create((document.getElementById('hide-content') || 'sample'),{
+            lang: SUNEDITOR_LANG['en'],
+
+            buttonList: [
+                ['undo', 'redo'],
+                ['font', 'fontSize', 'formatBlock'],
+                ['paragraphStyle', 'blockquote'],
+                ['bold', 'underline', 'italic', 'strike', 'subscript', 'superscript'],
+                ['fontColor', 'hiliteColor', 'textStyle'],
+                ['removeFormat'],
+                '/', // Line break
+                ['outdent', 'indent'],
+                ['align', 'horizontalRule', 'list', 'lineHeight'],
+                ['table', 'link', 'image', 'video', 'audio' /** ,'math' */], // You must add the 'katex' library at options to use the 'math' plugin.
+                /** ['imageGallery'] */ // You must add the "imageGalleryUrl".
+                ['fullScreen', 'showBlocks', 'codeView'],
+                ['preview', 'print'],
+                ['save', 'template'],
+                /** ['dir', 'dir_ltr', 'dir_rtl'] */ // "dir": Toggle text direction, "dir_ltr": Right to Left, "dir_rtl": Left to Right
+            ],
+            defaultStyle: 'font-family:arial',
+            width: '100%',
+            callBackSave: function (contents, isChanged) {
+                $("#input-hide-content").val(contents)
+            }
+        });
 
         function saveContent() {
             console.log('save')
             // console.log(editor.getContents())
             document.getElementById('content').value = editor.getContents();
+
+        }
+        function saveHideContent() {
+            console.log('save')
+            // console.log(editor.getContents())
+            document.getElementById('hide-content').value = editor2.getContents();
 
         }
 
