@@ -34,6 +34,14 @@
                 </div>
                 <!-- loader wrapper -->
                 <div class="row feed-body">
+                    <div class="col-xl-8">
+                        <div class="alert alert-success">
+                            Tổng thưởng của tháng này là: {{\Illuminate\Support\Number::currency($totalReward->total_reward ?? 0, 'VND') ?? '0đ'}}
+                        </div>
+                        <div class="alert alert-info @if($fromUser == '') d-none @endif">
+                            Bạn đang xem bài viết của {{$fromUser}} <a href="{{route('mainPost')}}">Quay lại</a>
+                        </div>
+                    </div>
                     <div class="col-xl-8 mb-4"
                          style="
                             background: cornsilk
@@ -46,14 +54,7 @@
                             </div>
                         </nav>
                     </div>
-                    <div class="col-xl-8">
-                        <div class="alert alert-success">
-                            Tổng thưởng của tháng này là: {{\Illuminate\Support\Number::currency($totalReward->total_reward ?? 0, 'VND') ?? '0đ'}}
-                        </div>
-                        <div class="alert alert-info @if($fromUser == '') d-none @endif">
-                            Bạn đang xem bài viết của {{$fromUser}} <a href="{{route('mainPost')}}">Quay lại</a>
-                        </div>
-                    </div>
+
                     <div class="tab-content" id="nav-tabContent">
                         <div id="nav-home" class="tab-pane fade show active col-xl-8 col-xxl-9 col-lg-8">
                             @foreach($posts as $post)
