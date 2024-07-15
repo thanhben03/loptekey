@@ -71,7 +71,7 @@
                                             {!! $post->content !!}
                                         <div  class="col-12 @if(!$post->link) d-none @endif" id="wrap-link-{{$post->id}}">
                                             Link:
-                                            @if(!in_array(request()->ip(), array_column($post->like->toArray(), "ip")))
+                                            @if(!in_array(request()->ip(), $post->like))
                                                 <span style="background: aquamarine;">Bạn phải ấn like để thấy link download !</span>
                                             @else
                                                 <div class="d-flex flex-column">
@@ -97,28 +97,24 @@
                                         </div>
                                     </div>
                                     <div class="card-body d-flex p-0 mt-3">
-                                            <span style="margin-right: 5px;" id="post-{{$post->id}}">{{isset($post->like) ? $post->like->count() : 0}} </span>
+                                            <span style="margin-right: 5px;" id="post-{{$post->id}}">{{isset($post->like) ? count($post->like) : 0}} </span>
 
                                             @if(count($post->like) >= 1)
-                                                @foreach($post->like as $like)
-                                                    @if($like->ip == request()->ip())
-                                                        <i
-                                                            class="feather-thumbs-up me-1 btn-round-xs font-md"
-                                                            style="color: chartreuse"
-                                                        >
-                                                        </i>
-                                                        @php
-                                                            break;
-                                                        @endphp
-                                                    @else
-                                                        <i
-                                                            onclick="likePost({{$post->id}})"
-                                                            class="feather-thumbs-up me-1 btn-round-xs font-md"
-                                                            id="btn-like-{{$post->id}}"
-                                                        >
-                                                        </i>
-                                                    @endif
-                                                @endforeach
+
+                                                @if(!in_array(request()->ip(),$post->like))
+                                                    <i
+                                                        onclick="likePost({{$post->id}})"
+                                                        class="feather-thumbs-up me-1 btn-round-xs font-md"
+                                                        id="btn-like-{{$post->id}}"
+                                                    >
+                                                    </i>
+                                                @else
+                                                    <i
+                                                        class="feather-thumbs-up me-1 btn-round-xs font-md"
+                                                        style="color: chartreuse"
+                                                    >
+                                                    </i>
+                                                @endif
                                             @else
                                                 <i
                                                     onclick="likePost({{$post->id}})"

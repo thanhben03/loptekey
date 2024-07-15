@@ -130,6 +130,15 @@ class PostController extends Controller
                 ->orderBy('updated_at', 'desc')
                 ->get();
         $fromUser = '';
+        foreach ($posts as $post) {
+            $likes = [];
+            foreach ($post->like as $like) {
+                $likes[] = $like->ip;
+            }
+
+            $post->like = $likes;
+        }
+
         if ($request->query('user_id')) {
             $fromUser = User::query()->where('id', $request->query('user_id'))->first()->name;
             $user_posts = UserPost::query()
