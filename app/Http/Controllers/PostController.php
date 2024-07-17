@@ -153,7 +153,7 @@ class PostController extends Controller
         foreach ($posts as $post) {
             $likes = [];
             foreach ($post->like as $like) {
-                $likes[] = $like->ip;
+                $likes[] = $like->session_like_id;
             }
 
             $post->like = $likes;
@@ -197,16 +197,9 @@ class PostController extends Controller
         $data = $request->all();
         $data['ip'] = $request->ip();
         $post = Post::query()->where('id', $data['post_id'])->first();
-        try {
-            $ipCanLike = Key::query()
-                ->where('ip', $request->ip())
-                ->firstOrFail();
-        } catch (\Throwable $th) {
-            return response()->json([
-                'status' => 'error',
-                'msg' => 'error'
-            ], 400);
-        }
+        $ss_id = session()->getId();
+        $data['session_like_id'] = $ss_id;
+
         $isLike = PostLike::query()
             ->where('post_id', $data['post_id'])
             ->where('ip', $data['ip'])
@@ -223,7 +216,7 @@ class PostController extends Controller
             'status' => 'success',
             'msg' => 'success',
             'link' => $post->link
-        ]);
+        ])->withCookie(cookie('session_like_id', $ss_id));
 
     }
 

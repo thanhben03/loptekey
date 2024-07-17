@@ -22,7 +22,7 @@ class Post extends Model
 
     public function like()
     {
-        return $this->hasMany(PostLike::class, 'post_id', 'id')->select('ip');
+        return $this->hasMany(PostLike::class, 'post_id', 'id');
     }
 
     public function user_post()
@@ -33,7 +33,7 @@ class Post extends Model
 
     public function oneUser()
     {
-        return $this->hasOne(User::clas);
+        return $this->hasOne(User::class);
     }
 
     public function images()

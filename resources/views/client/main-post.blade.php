@@ -109,8 +109,7 @@
                                             <span style="margin-right: 5px;" id="post-{{$post->id}}">{{isset($post->like) ? count($post->like) : 0}} </span>
 
                                             @if(count($post->like) >= 1)
-
-                                                @if(!in_array(request()->ip(),$post->like))
+                                                @if(!in_array(request()->cookie('session_like_id'),$post->like))
                                                     <i
                                                         onclick="likePost({{$post->id}})"
                                                         class="feather-thumbs-up me-1 btn-round-xs font-md"
