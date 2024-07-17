@@ -147,6 +147,7 @@ class HomeController extends Controller
         $exist = DB::table('history_rewards')
             ->whereMonth('created_at', $month)
             ->whereYear('created_at', $year)
+            ->where('user_id', \auth()->user()->id)
             ->first();
         if ($exist != null) {
             return redirect()->back()->with('msg', 'Tháng này bạn đã nhận thưởng');
