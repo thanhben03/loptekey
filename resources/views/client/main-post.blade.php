@@ -72,7 +72,7 @@
                                             {!! $post->content !!}
                                         <div  class="col-12 @if(!$post->content) d-none @endif" id="wrap-link-{{$post->id}}">
                                             Nội dung ẩn:
-                                            @if(!in_array(request()->ip(), $post->like))
+                                            @if(!in_array(request()->cookie('session_like_id'), $post->like))
                                                 <span id="hide-content-{{$post->id}}" style="background: aquamarine;">Bạn phải ấn like để thấy nội dung !</span>
                                             @else
                                                 <div class="d-flex flex-column">
