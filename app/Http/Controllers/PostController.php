@@ -197,6 +197,16 @@ class PostController extends Controller
         $data = $request->all();
         $data['ip'] = $request->ip();
         $post = Post::query()->where('id', $data['post_id'])->first();
+        try {
+            $ipCanLike = Key::query()
+                ->where('ip', $request->ip())
+                ->firstOrFail();
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => 'error',
+                'msg' => 'error'
+            ], 400);
+        }
         $isLike = PostLike::query()
             ->where('post_id', $data['post_id'])
             ->where('ip', $data['ip'])
