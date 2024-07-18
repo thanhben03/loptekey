@@ -27,6 +27,12 @@ class TotalRewardResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('total_reward')
                     ->label('Tổng thưởng'),
+                Forms\Components\Select::make('status')
+                    ->options([
+                        '1' => 'Chốt sổ',
+                        '0' => 'Chờ',
+                    ])
+                    ->label('Tổng thưởng'),
                 Forms\Components\DatePicker::make('apply_date')
                     ->label('Thời gian')
             ]);
@@ -39,6 +45,14 @@ class TotalRewardResource extends Resource
                 Tables\Columns\TextColumn::make('total_reward')
                 ->label('Tổng thưởng')
                 ->money('vnd'),
+                Tables\Columns\SelectColumn::make('status')
+                    ->options([
+                        '1' => 'Chốt sổ',
+                        '0' => 'Chờ',
+                    ])
+                    ->afterStateUpdated(function (?string $state) {
+                        dd($state);
+                    }),
                 Tables\Columns\TextColumn::make('apply_date')
                 ->label('Thời gian')
                 ->searchable()
