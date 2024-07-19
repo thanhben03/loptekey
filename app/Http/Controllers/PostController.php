@@ -202,7 +202,7 @@ class PostController extends Controller
 
         $isLike = PostLike::query()
             ->where('post_id', $data['post_id'])
-            ->where('ip', $data['ip'])
+            ->where('session_like_id', $data['session_like_id'])
             ->first();
         if (!$isLike) {
             PostLike::query()->create($data);
