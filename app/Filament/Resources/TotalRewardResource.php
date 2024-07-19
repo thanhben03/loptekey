@@ -63,7 +63,7 @@ class TotalRewardResource extends Resource
                         if ($state == 1) {
                             try {
                                 // lay tat ca bai viet cua admin de ko tinh vao like
-                                $idAdmin = User::query()->where('id', 1)->first();
+                                $idAdmin = User::query()->where('id', 5)->first();
                                 $postAdminIds = $idAdmin->posts->pluck('id')->toArray();
 
                                 $tops = PostLike::query()

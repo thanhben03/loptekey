@@ -189,7 +189,11 @@ class PostController extends Controller
             ->groupBy('post_id')
             ->orderBy('like_count', 'desc')
             ->get();
-        return view('client.hide-post', compact('posts', 'user', 'tops'));
+        $totalReward = TotalReward::query()
+            ->whereMonth('apply_date', now()->month)
+            ->whereYear('apply_date', now()->year)
+            ->first();
+        return view('client.hide-post', compact('totalReward','posts', 'user', 'tops'));
     }
 
     public function likePost(Request $request)
