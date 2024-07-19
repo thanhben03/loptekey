@@ -53,13 +53,13 @@
         <!-- Brand Logo -->
         <div class="logo-box">
             <!-- Brand Logo Light -->
-            <a href="{{route('admin.home')}}" class="logo-light">
+            <a href="{{route('home')}}" class="logo-light">
                 <img src="{{asset('user/assets/images/logo-light.png')}}" alt="logo" class="logo-lg" height="28">
                 <img src="{{asset('user/assets/images/logo-sm.png')}}" alt="small logo" class="logo-sm" height="28">
             </a>
 
             <!-- Brand Logo Dark -->
-            <a href="{{route('admin.home')}}" class="logo-dark">
+            <a href="{{route('home')}}" class="logo-dark">
                 <img src="{{asset('user/assets/images/logo-dark.png')}}" alt="dark logo" class="logo-lg" height="28">
                 <img src="{{asset('user/assets/images/logo-sm.png')}}" alt="small logo" class="logo-sm" height="28">
             </a>
@@ -142,13 +142,13 @@
                     <!-- Brand Logo -->
                     <div class="logo-box">
                         <!-- Brand Logo Light -->
-                        <a href="{{route('admin.home')}}" class="logo-light">
+                        <a href="{{route('home')}}" class="logo-light">
                             <img src="assets/images/logo-light.png" alt="logo" class="logo-lg" height="22">
                             <img src="assets/images/logo-sm.png" alt="small logo" class="logo-sm" height="22">
                         </a>
 
                         <!-- Brand Logo Dark -->
-                        <a href="{{route('admin.home')}}" class="logo-dark">
+                        <a href="{{route('home')}}" class="logo-dark">
                             <img src="{{asset('user/assets/images/logo-dark.png')}}" alt="dark logo" class="logo-lg" height="22">
                             <img src="{{asset('user/assets/images/logo-sm.png')}}" alt="small logo" class="logo-sm" height="22">
                         </a>
