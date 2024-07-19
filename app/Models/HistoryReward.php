@@ -10,6 +10,7 @@ class HistoryReward extends Model
     use HasFactory;
     protected $guarded = [];
     protected $table = 'history_rewards';
+    public $timestamps = false;
 
     public function user()
     {

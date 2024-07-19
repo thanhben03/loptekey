@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\HistoryReward;
 use App\Models\HistoryWithdraw;
 use App\Models\Key;
 use App\Models\KeyType;
 use App\Models\Order;
 use App\Models\PostLike;
+use App\Models\TotalReward;
 use App\Models\User;
 use App\Models\UserPost;
 use Illuminate\Http\Request;
@@ -62,14 +64,16 @@ class HomeController extends Controller
         $month = $now->month;
         $year = $now->year;
 
+        $idAdmin = User::query()->where('id', 1)->first();
+        $postAdminIds = $idAdmin->posts->pluck('id')->toArray();
         $tops = PostLike::query()
             ->select('post_id', DB::raw('count(*) as like_count'))
+            ->whereNotIn('post_id', $postAdminIds)
             ->whereMonth('created_at', $month)
             ->whereYear('created_at', $year)
             ->groupBy('post_id')
             ->orderBy('like_count', 'desc')
             ->get();
-
         return $tops;
     }
 
@@ -81,20 +85,29 @@ class HomeController extends Controller
 
         $tops = $this->getAllPostLike();
 
-
+        $rewards = HistoryReward::query()
+            ->where('user_id', \auth()->user()->id)
+            ->get();
         $totalLike = $tops->sum('like_count');
 
         // Lay tong thuong theo thang
         $total_reward = $this->getTotalReward();
 
         // price tren 1 like
-        $price_per_like = $total_reward->total_reward/$totalLike;
+        $price_per_like = $totalLike == 0 ? 0 : $total_reward->total_reward / $totalLike;
 
         // lay post theo user id
-        $postIds = UserPost::query()->where('user_id', Auth::user()->id)->pluck('post_id');
+        if (Auth::user()->id != 1) {
+            $postIds = UserPost::query()
+                ->where('user_id', Auth::user()->id)
+                ->pluck('post_id');
+            // lay reward by user_id
+            $myReward = $this->getRewardByUserId($postIds, $price_per_like);
+        } else {
+            $myReward = 0;
+        }
 
-        // lay reward by user_id
-        $myReward = $this->getRewardByUserId($postIds, $price_per_like);
+
 
         return view('client.reward',
             [
@@ -102,9 +115,11 @@ class HomeController extends Controller
                 'total_reward' => Number::currency($total_reward->total_reward, 'VND'),
                 'price_per_like' => Number::currency($price_per_like, 'VND'),
                 'myReward' => Number::currency($myReward, 'VND'),
+                'rewards' => $rewards,
             ]
         );
     }
+
 
     public function getRewardByUserId($postIds, $price_per_like)
     {
@@ -120,8 +135,6 @@ class HomeController extends Controller
             ->groupBy('post_id')
             ->orderBy('like_count', 'desc')
             ->get()->sum('like_count') * $price_per_like;
-
-
     }
 
     public function getTotalReward()
@@ -149,6 +162,16 @@ class HomeController extends Controller
             ->whereYear('created_at', $year)
             ->where('user_id', \auth()->user()->id)
             ->first();
+
+        $canGetReward = TotalReward::query()
+            ->whereMonth('created_at', $month)
+            ->whereYear('created_at', $year)
+            ->where('status', 1)
+            ->first();
+        if (!$canGetReward) {
+            return redirect()->back()->with('msg', 'Chưa đến thời gian nhận thưởng');
+
+        }
         if ($exist != null) {
             return redirect()->back()->with('msg', 'Tháng này bạn đã nhận thưởng');
         }

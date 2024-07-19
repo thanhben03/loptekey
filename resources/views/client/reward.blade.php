@@ -15,28 +15,22 @@
         <!-- end page title -->
         <div class="row">
             <div class="col-md-6">
-                <h2>Bảng xếp hạng</h2>
+                <h2>Lịch sử nhận</h2>
                 <div class="">
                     <table class="table">
                         <thead class="thead-dark">
                         <tr>
-                            <th scope="col">Top</th>
-                            <th scope="col">Username</th>
-                            <th scope="col">Post</th>
-                            <th scope="col">Like</th>
+                            <th scope="col">#</th>
+                            <th scope="col">Money</th>
+                            <th scope="col">Ngày nhận</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($tops as $key => $top)
+                        @foreach($rewards as $key => $reward)
                             <tr>
-                                <th>{{++$key}}</th>
-                                <th>
-                                    {{$top->post->user_post[0]->user->name}}
-                                </th>
-                                <th>
-                                    {{$top->post->title}}
-                                </th>
-                                <th>{{$top->like_count}}</th>
+                                <td>{{++$key}}</td>
+                                <td>{{\Illuminate\Support\Number::currency($reward->reward, 'VND')}}</td>
+                                <td>{{$reward->created_at}}</td>
                             </tr>
                         @endforeach
                         </tbody>
@@ -60,9 +54,9 @@
                                 <p>{{ Session::get('msg') }}</p>
                         </div>
                     @endif
-                    <a href="{{route('sendMoneyAward')}}" class="btn btn-primary">
-                        Nhận thưởng
-                    </a>
+{{--                    <a href="{{route('sendMoneyAward')}}" class="btn btn-primary">--}}
+{{--                        Nhận thưởng--}}
+{{--                    </a>--}}
                 </div>
             </div>
         </div>
