@@ -81,14 +81,14 @@
                         <div id="nav-home" class=" tab-pane fade show active col-xl-8 col-xxl-9 col-lg-8">
                             @foreach($posts as $post)
                                 <div class="card w-100 shadow-xss rounded-xxl border-0 p-4 mb-3 ct-box-shadow">
-                                    <div class="card-body p-0 d-flex post-content">
+                                    <div class="card-body p-0 d-flex">
                                         <figure class="avatar me-3"><img src="{{$post->user_post[0]->user->avatar}}" alt="image" class="shadow-sm rounded-circle w45"></figure>
                                         <h4 class="fw-700 text-grey-900 font-xssss mt-1">{{$post->user_post[0]->user->name}}<span class="d-block font-xssss fw-500 mt-1 lh-3 text-grey-500">{{$post->updated_at->diffForHumans()}}</span></h4>
                                         <a href="#" class="ms-auto" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false"><i class="ti-more-alt text-grey-900 btn-round-md bg-greylight font-xss"></i></a>
                                     </div>
-                                    <div id="show-content-{{$post->id}}" class="card-body p-0 me-lg-5 position-relative">
+                                    <div id="show-content-{{$post->id}}" class="card-body p-0 me-lg-5 position-relative post-content">
                                         <h3><strong>{{$post->title}}</strong></h3>
-                                        <p class="fw-500 text-grey-500 lh-26 font-xssss w-100">
+                                        <p class="fw-500 text-grey-500 lh-26 font-xssss w-100 ">
                                             {!! $post->content !!}
 {{--                                            @if(!in_array(request()->ip(), array_column($post->like->toArray(), "ip")))--}}
 {{--                                                <a href="#" style="background: aqua" class="fw-600 text-primary">--}}
