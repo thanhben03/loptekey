@@ -81,7 +81,7 @@
                         <div id="nav-home" class=" tab-pane fade show active col-xl-8 col-xxl-9 col-lg-8">
                             @foreach($posts as $post)
                                 <div class="card w-100 shadow-xss rounded-xxl border-0 p-4 mb-3 ct-box-shadow">
-                                    <div class="card-body p-0 d-flex">
+                                    <div class="card-body p-0 d-flex post-content">
                                         <figure class="avatar me-3"><img src="{{$post->user_post[0]->user->avatar}}" alt="image" class="shadow-sm rounded-circle w45"></figure>
                                         <h4 class="fw-700 text-grey-900 font-xssss mt-1">{{$post->user_post[0]->user->name}}<span class="d-block font-xssss fw-500 mt-1 lh-3 text-grey-500">{{$post->updated_at->diffForHumans()}}</span></h4>
                                         <a href="#" class="ms-auto" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false"><i class="ti-more-alt text-grey-900 btn-round-md bg-greylight font-xss"></i></a>
@@ -100,8 +100,7 @@
                                             Link:
                                             @if(!in_array(request()->ip(), array_column($post->like->toArray(), "ip")))
                                                 <span style="background: aquamarine;">Bạn phải ấn like để thấy link download !</span>
-                                            @else
-                                                <a href="{{$post->link}}">{{$post->link}}</a>
+
                                             @endif
                                         </div>
                                     </div>
