@@ -16,7 +16,7 @@ class CheckAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::check() && Auth::user()->id == 1) {
+        if (Auth::check() && Auth::user()->id == 5) {
             return $next($request);
         }
 
