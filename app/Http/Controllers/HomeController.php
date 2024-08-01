@@ -48,7 +48,9 @@ class HomeController extends Controller
     public function home()
     {
 
-        $keyType = KeyType::query()->get();
+        $keyType = KeyType::query()
+            ->whereNot('id', '=', 5)
+            ->get();
         $historyBuy = Order::query()->where('user_id', Auth::user()->id)->get();
         return view('client.home', compact('keyType', 'historyBuy'));
     }
