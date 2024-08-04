@@ -102,7 +102,7 @@ class PaymentController extends Controller
 
         return view('client.payment-success', [
             'amount' => Number::currency($transaction['amount'], 'VND'),
-            'username' => $user->name
+            'username' => Auth::user()->name
         ]);
     }
 
