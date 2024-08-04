@@ -1,16 +1,50 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thanh toán thành công</title>
-    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:400,400i,700,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
 </head>
+<style>
+    body {
+        text-align: center;
+        padding: 40px 0;
+        background: #EBF0F5;
+    }
+    h1 {
+        color: #88B04B;
+        font-family: "Nunito Sans", "Helvetica Neue", sans-serif;
+        font-weight: 900;
+        font-size: 40px;
+        margin-bottom: 10px;
+    }
+    p {
+        color: #404F5E;
+        font-family: "Nunito Sans", "Helvetica Neue", sans-serif;
+        font-size:20px;
+        margin: 0;
+    }
+    i {
+        color: #9ABC66;
+        font-size: 100px;
+        line-height: 200px;
+        margin-left:-15px;
+    }
+    .card {
+        background: white;
+        padding: 60px;
+        border-radius: 4px;
+        box-shadow: 0 2px 3px #C8D0D8;
+        display: inline-block;
+        margin: 0 auto;
+    }
+</style>
 <body>
-<div class="main-box">
-    <h4 class="payment-titlte">Thanh toán thành công. Cảm ơn bạn đã sử dụng payOS!</h4>
-    <p>Nếu có bất kỳ câu hỏi nào, hãy gửi email tới <a href="mailto:support@casso.vn">support@casso.vn</a></p>
-    <a href="/" id="return-page-btn">Trở về trang Tạo Link thanh toán</a>
+<div class="card">
+    <div style="border-radius:200px; height:200px; width:200px; background: #F8FAF5; margin:0 auto;">
+        <i class="checkmark">✓</i>
+    </div>
+    <h1>Success</h1>
+    <p>Đã thanh toán thành công số tiền {{$amount}} cho tài khoản <strong>{{$username}}</strong><br/> Cảm ơn bạn đã sử dụng dịch vụ !</p>
+    <a href="{{route('charge')}}" class="btn btn-success">Quay lại</a>
 </div>
 </body>
 </html>

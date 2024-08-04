@@ -14,22 +14,21 @@
         </div>
         <!-- end page title -->
         <div class="row">
-{{--            <form action="{{route('createPaymentLink')}}" method="POST">--}}
-{{--                @csrf--}}
+            <form id="formCreatePayment" action="{{route('createPaymentLink')}}" method="POST">
+                @csrf
                 <div class="col-6">
                     <h2>Nạp tiền</h2>
-{{--                    <div class="form-group">--}}
-{{--                        <label for="amount">Số tiền cần nạp</label>--}}
-{{--                        <input id="amount" name="amount" class="form-control mb-2" type="number" placeholder="Min: 1.000đ">--}}
-{{--                    </div>--}}
-{{--                    <div class="">--}}
-{{--                        <button class="btn btn-info" id="btn-charge">--}}
-{{--                            Nạp--}}
-{{--                        </button>--}}
-{{--                    </div>--}}
-                    <button class="btn btn-info" onclick="showModal()">Liên hệ</button>
+                    <div class="form-group">
+                        <label for="amount">Số tiền cần nạp</label>
+                        <input id="amount" name="amount" class="form-control mb-2" type="number" placeholder="Min: {{$minCharge}}">
+                    </div>
+                    <div class="">
+                        <button class="btn btn-info" id="btn-charge">
+                            Nạp
+                        </button>
+                    </div>
                 </div>
-{{--            </form>--}}
+            </form>
             <div class="col-6">
                 <h3>Lưu ý</h3>
 
@@ -45,40 +44,40 @@
 
             <div class="col-12">
                 <div class="card">
-                    <div class="card-body">
-                        <div id="basic-datatable_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
+                    <div class="card-body overflow-auto">
+                        <div id="basic-datatable_wrapper" class="">
                             <div class="row dt-row">
                                 <div class="col-sm-12">
-{{--                                    <table id="basic-datatable" class="table dt-responsive nowrap w-100 dataTable no-footer dtr-inline collapsed" aria-describedby="basic-datatable_info" style="width: 1192px;">--}}
-{{--                                        <thead>--}}
-{{--                                        <tr>--}}
-{{--                                            <th class="sorting sorting_asc" tabindex="0" aria-controls="basic-datatable" rowspan="1" colspan="1" style="width: 191px;" aria-sort="ascending" aria-label="Name: activate to sort column descending">Name</th>--}}
-{{--                                            <th class="sorting" tabindex="0" aria-controls="basic-datatable" rowspan="1" colspan="1" style="width: 288px;" aria-label="Position: activate to sort column ascending">Loại key</th>--}}
-{{--                                            <th class="sorting" tabindex="0" aria-controls="basic-datatable" rowspan="1" colspan="1" style="width: 138px;" aria-label="Office: activate to sort column ascending">Giá</th>--}}
-{{--                                            <th class="sorting" tabindex="0" aria-controls="basic-datatable" rowspan="1" colspan="1" style="width: 70px;" aria-label="Age: activate to sort column ascending">Trạng thái</th>--}}
-{{--                                            <th class="sorting" tabindex="0" aria-controls="basic-datatable" rowspan="1" colspan="1" style="width: 135px;" aria-label="Start date: activate to sort column ascending">Ngày hết hạn</th>--}}
-{{--                                            <th class="sorting dtr-hidden" tabindex="0" aria-controls="basic-datatable" rowspan="1" colspan="1" style="width: 118px; display: none;" aria-label="Salary: activate to sort column ascending">Ngày mua</th>--}}
-{{--                                        </tr>--}}
-{{--                                        </thead>--}}
-{{--                                        <tbody>--}}
-{{--                                            @foreach($historyBuy as $item)--}}
-{{--                                                <tr class="odd">--}}
-{{--                                                    <td class="dtr-control sorting_1" tabindex="0">{{$item->key->name}}</td>--}}
-{{--                                                    <td>{{$item->key->keyType->name_type}}</td>--}}
-{{--                                                    <td>{{$item->key->keyType->price}}</td>--}}
-{{--                                                    <td>--}}
-{{--                                                        @if($item->key->status == 2)--}}
-{{--                                                            Đã kích hoạt--}}
-{{--                                                        @else--}}
-{{--                                                            Chưa kích hoạt--}}
-{{--                                                        @endif--}}
-{{--                                                    </td>--}}
-{{--                                                    <td>{{$item->key->expired}}</td>--}}
-{{--                                                    <td>{{$item->created_at}}</td>--}}
-{{--                                                </tr>--}}
-{{--                                            @endforeach--}}
-{{--                                        </tbody>--}}
-{{--                                    </table>--}}
+                                    <table id="history-post-datatable" class="table dt-responsive nowrap w-100 dataTable no-footer dtr-inline collapsed" aria-describedby="basic-datatable_info">
+                                        <thead>
+                                        <tr>
+                                            <th>Order Code</th>
+                                            <th>Amount</th>
+                                            <th>Content</th>
+                                            <th>Status</th>
+                                            <th>Created At</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        @foreach($charges as $item)
+                                            <tr class="odd">
+                                                <td class="" tabindex="0">{{$item->id}}</td>
+                                                <td>{{$item->amount}}</td>
+                                                <td>{{$item->content}}</td>
+                                                <td>
+                                                    @if($item->status)
+                                                        Đã duyệt
+                                                    @else
+                                                        Chờ duyệt
+                                                    @endif
+                                                </td>
+                                                <td>{{$item->created_at}}</td>
+
+
+                                            </tr>
+                                        @endforeach
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
@@ -96,10 +95,16 @@
 @push('custom-js')
 
     <script>
-        $(function () {
-            showModal()
-        })
+        // $(function () {
+        //     showModal()
+        // })
         $("#basic-datatable").DataTable()
+
+        const formCreatePayment = $("#formCreatePayment");
+        formCreatePayment.submit(function (e) {
+            e.preventDefault();
+            charge(e);
+        })
         function showModal() {
             Swal.fire({
                 title: "Thông báo !",
@@ -117,7 +122,12 @@
                 confirmButtonText: "OK"
             })
         }
-        async function charge() {
+        async function charge(form) {
+            const amount = $("#amount").val();
+            if (amount < {{$minCharge}}) {
+                alert("Số tiền phải lớn hơn hoặc bằng " + {{$minCharge}})
+                return;
+            }
             const confrim = await Swal.fire({
                 title: "Nhắc nhở !",
                 text: "Bạn có chắc chắn ?",
@@ -128,30 +138,7 @@
                 confirmButtonText: "OK"
             })
             if (confrim.isConfirmed) {
-                await $.ajax({
-                    url: "{{route('buyKey')}}",
-                    dataType: "json",
-                    method: "POST",
-                    data: {
-                        "_token": "{{ csrf_token() }}",
-                        "amount": $("#amount").val(),
-                    },
-                    success: function (res) {
-                        Swal.fire({
-                            title: res.data.msg,
-                            html: `Bạn đã nạp thành công số tiền <b>${res.data.amount}</b>`,
-                            icon: "success"
-                        });
-                    },
-                    error: function (xhr, status, error) {
-                        console.log(error);
-                        Swal.fire({
-                            title: "Error !",
-                            html: `${xhr.responseJSON.msg}`,
-                            icon: "error"
-                        });
-                    }
-                })
+                form.currentTarget.submit();
             }
         }
     </script>

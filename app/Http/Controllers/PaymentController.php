@@ -4,9 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\Key;
 use App\Models\Order;
+use App\Models\Payment;
+use App\Models\Setting;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Number;
 use PayOS\PayOS;
 
 class PaymentController extends Controller
@@ -41,7 +46,7 @@ class PaymentController extends Controller
         $data = [
             "orderCode" => intval(substr(strval(microtime(true) * 10000), -6)),
             "amount" => intval($request->amount),
-            "description" => "Thanh toán đơn hàng",
+            "description" => "Donate #". Auth::user()->id,
             "returnUrl" => route('paymentSuccess'),
             "cancelUrl" => "/",
         ];
@@ -67,15 +72,48 @@ class PaymentController extends Controller
         $PAYOS_API_KEY = env('PAYOS_API_KEY');
         $PAYOS_CHECKSUM_KEY = env('PAYOS_CHECKSUM_KEY');
         $payOS = new PayOS($PAYOS_CLIENT_ID, $PAYOS_API_KEY, $PAYOS_CHECKSUM_KEY);
+
         $orderCode = $request->orderCode;
-        $userId = Auth::user()->id;
+
         $resultPayment = $payOS->getPaymentLinkInformation($orderCode);
-        dd($resultPayment);
-        return view('client.payment-success');
+        $transaction = $resultPayment['transactions'][0];
+        $content = $transaction['description'];
+        $getUserId = explode(" ", $content)[3];
+        $user = User::query()->find($getUserId);
+        try {
+            DB::beginTransaction();
+            if (!Payment::query()->where('orderCode', $orderCode)->exists()) {
+                $res = Payment::query()
+                    ->create([
+                        'user_id' => $getUserId,
+                        'amount' => $transaction['amount'],
+                        'content' => $content,
+                        'status' => 1,
+                        'orderCode' => $orderCode,
+                    ]);
+                $totalMoney = $transaction['amount'] + Auth::user()->money;
+                Auth::user()->update([
+                    'money' => $totalMoney,
+                ]);
+            }
+            DB::commit();
+        } catch (\Throwable $exception) {
+            DB::rollBack();
+            print_r($exception->getMessage());
+        }
+
+        return view('client.payment-success', [
+            'amount' => Number::currency($transaction['amount'], 'VND'),
+            'username' => $user->name
+        ]);
     }
 
     public function charge()
     {
-        return view('client.charge');
+        $charges = Payment::query()->where('user_id', Auth::user()->id)->get();
+        $minCharge = Setting::query()->where('key', 'min_charge')
+            ->first()->value;
+        $minChargeFormat = Number::currency($minCharge, 'VND');
+        return view('client.charge', compact('charges', 'minCharge', 'minChargeFormat'));
     }
 }
