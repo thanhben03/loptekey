@@ -14,14 +14,22 @@
         </div>
         <!-- end page title -->
         <div class="row">
-            <div class="col-6">
-                <h2>Nạp tiền</h2>
-                <div class="">
-                    <button onclick="showModal()" class="btn btn-info" id="btn-charge">
-                        Liên hệ
-                    </button>
+{{--            <form action="{{route('createPaymentLink')}}" method="POST">--}}
+{{--                @csrf--}}
+                <div class="col-6">
+                    <h2>Nạp tiền</h2>
+{{--                    <div class="form-group">--}}
+{{--                        <label for="amount">Số tiền cần nạp</label>--}}
+{{--                        <input id="amount" name="amount" class="form-control mb-2" type="number" placeholder="Min: 1.000đ">--}}
+{{--                    </div>--}}
+{{--                    <div class="">--}}
+{{--                        <button class="btn btn-info" id="btn-charge">--}}
+{{--                            Nạp--}}
+{{--                        </button>--}}
+{{--                    </div>--}}
+                    <button class="btn btn-info" onclick="showModal()">Liên hệ</button>
                 </div>
-            </div>
+{{--            </form>--}}
             <div class="col-6">
                 <h3>Lưu ý</h3>
 
@@ -126,12 +134,12 @@
                     method: "POST",
                     data: {
                         "_token": "{{ csrf_token() }}",
-                        "key_id": $("#key_type").val(),
+                        "amount": $("#amount").val(),
                     },
                     success: function (res) {
                         Swal.fire({
                             title: res.data.msg,
-                            html: `Bạn đã mua thành công ${res.data.name_type} : <b>${res.data.name}</b>`,
+                            html: `Bạn đã nạp thành công số tiền <b>${res.data.amount}</b>`,
                             icon: "success"
                         });
                     },

@@ -21,7 +21,12 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', [HomeController::class, 'home'])->middleware(['auth', 'verified'])->name('home');
-Route::get('/charge', [HomeController::class, 'charge'])->middleware(['auth', 'verified'])->name('charge');
+Route::get('/charge', [PaymentController::class, 'charge'])->middleware(['auth', 'verified'])->name('charge');
+Route::get('/payment-success', [PaymentController::class, 'paymentSuccess'])
+    ->middleware(['auth', 'verified'])
+    ->name('paymentSuccess');
+
+Route::post('/createPaymentLink', [PaymentController::class, 'createPaymentLink'])->middleware(['auth', 'verified'])->name('createPaymentLink');
 Route::get('/reward', [HomeController::class, 'reward'])->middleware(['auth'])->name('reward');
 Route::get('/withdraw', [HomeController::class, 'withdraw'])->middleware(['auth'])->name('withdraw');
 Route::post('/process-withdraw', [HomeController::class, 'processWithdraw'])->middleware(['auth'])->name('processWithdraw');

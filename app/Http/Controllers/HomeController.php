@@ -114,7 +114,7 @@ class HomeController extends Controller
         return view('client.reward',
             [
                 'tops' => $tops,
-                'total_reward' => Number::currency($total_reward->total_reward, 'VND'),
+                'total_reward' => Number::currency($total_reward->total_reward ?? 0, 'VND'),
                 'price_per_like' => Number::currency($price_per_like, 'VND'),
                 'myReward' => Number::currency($myReward, 'VND'),
                 'rewards' => $rewards,
