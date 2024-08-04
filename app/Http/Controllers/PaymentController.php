@@ -42,11 +42,11 @@ class PaymentController extends Controller
 
     public function createPaymentLink(Request $request)
     {
-        $YOUR_DOMAIN = "http://filament.test";
+        $YOUR_DOMAIN = "https://filament.test";
         $data = [
             "orderCode" => intval(substr(strval(microtime(true) * 10000), -6)),
             "amount" => intval($request->amount),
-            "description" => "Donate #". Auth::user()->id,
+            "description" => "Donate user". Auth::user()->id,
             "returnUrl" => route('paymentSuccess'),
             "cancelUrl" => "/",
         ];
@@ -78,14 +78,12 @@ class PaymentController extends Controller
         $resultPayment = $payOS->getPaymentLinkInformation($orderCode);
         $transaction = $resultPayment['transactions'][0];
         $content = $transaction['description'];
-        $getUserId = explode(" ", $content)[3];
-        $user = User::query()->find($getUserId);
         try {
             DB::beginTransaction();
             if (!Payment::query()->where('orderCode', $orderCode)->exists()) {
                 $res = Payment::query()
                     ->create([
-                        'user_id' => $getUserId,
+                        'user_id' => Auth::user()->id,
                         'amount' => $transaction['amount'],
                         'content' => $content,
                         'status' => 1,
