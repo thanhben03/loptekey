@@ -1,6 +1,31 @@
 
 @extends('layouts.post')
 @section('content')
+    <!-- Search model Begin -->
+    <div style="display: none" class="search-model">
+        <form action="{{route("mainPost")}}" method="GET">
+            <div class="h-100 d-flex align-items-center justify-content-center">
+                <div class="search-close-switch"><i class="icon_close"></i></div>
+                <div class="popup">
+                    <div class="so btn btn-info" onclick="chonSo(0)">0</div>
+                    <div class="so btn btn-info" onclick="chonSo(1)">1</div>
+                    <div class="so btn btn-info" onclick="chonSo(2)">2</div>
+                    <div class="so btn btn-info" onclick="chonSo(3)">3</div>
+                    <div class="so btn btn-info" onclick="chonSo(4)">4</div>
+                    <div class="so btn btn-info" onclick="chonSo(5)">5</div>
+                    <div class="so btn btn-info" onclick="chonSo(6)">6</div>
+                    <div class="so btn btn-info" onclick="chonSo(7)">7</div>
+                    <div class="so btn btn-info" onclick="chonSo(8)">8</div>
+                    <div class="so btn btn-info" onclick="chonSo(9)">9</div>
+                    <button type="button" class="btn btn-danger" onclick="clearValue()">Clear</button>
+                    <button class="ml-4 btn btn-success" onclick="search()">Search</button>
+                </div>
+                <input name="q" placeholder="Search..." type="text" id="search-input" class="form-control">
+            </div>
+        </form>
+    </div>
+
+
     <div class="main-content right-chat-active" style="background-image: url({{asset('images/background2.png')}})">
 
         <div class="middle-sidebar-bottom" >
@@ -43,16 +68,23 @@
                         </div>
                     </div>
                     <div class="col-xl-8 mb-4"
-                         >
+                    >
                         <nav style="
                             background: cornsilk
                          ">
                             <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Home</button>
+                                <a href="{{route("mainPost")}}" class="nav-link" id="nav-home-tab"  aria-controls="nav-home" aria-selected="true">Home</a>
                                 <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Ranking</button>
                                 <a href="https://loptephim.xyz" class="nav-link">Trang Chủ</a>
                             </div>
                         </nav>
+                    </div>
+                    <div class="col-xl-8 mb-4"
+                    >
+                        <div class="wrap-search">
+                            <button id="btn-search" class="btn btn-info">Search</button>
+                        </div>
+
                     </div>
 
                     <div class="tab-content" id="nav-tabContent">
@@ -67,7 +99,7 @@
                                         <a href="#" class="ms-auto" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false"><i class="ti-more-alt text-grey-900 btn-round-md bg-greylight font-xss"></i></a>
                                     </div>
                                     <div class="card-body p-0 me-lg-5 post-content">
-                                        <h3><strong>{{$post->title}}</strong></h3>
+                                        <h3><strong>{{$post->title}} #{{$post->id}}</strong></h3>
                                         <p class="fw-500 text-grey-500 lh-26 font-xssss w-100">
                                             {!! $post->content !!}
                                         <div  class="col-12 @if(!$post->content) d-none @endif" id="wrap-link-{{$post->id}}">
@@ -247,6 +279,20 @@
 
 @push('custom-js')
     <script>
+
+        $("#btn-search").click(function () {
+            console.log("123")
+            $(".search-model").css("display", "block")
+        });
+
+        function chonSo(so) {
+            document.getElementById("search-input").value += so;
+
+        }
+
+        function clearValue() {
+            document.getElementById("search-input").value = '';
+        }
 
         function postComment() {
             $.ajax({

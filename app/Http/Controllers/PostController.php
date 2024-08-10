@@ -150,6 +150,13 @@ class PostController extends Controller
                 ->orderBy('updated_at', 'desc')
                 ->get();
         }
+        if ($request->query('q')) {
+            $posts = Post::query()
+                ->active()
+                ->where('id', $request->query('q'))
+                ->orderBy('updated_at', 'desc')
+                ->get();
+        }
         foreach ($posts as $post) {
             $likes = [];
             foreach ($post->like as $like) {

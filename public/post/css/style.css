@@ -3972,6 +3972,7 @@ fieldset:disabled .btn {
     color: #fff;
     background-color: #2754e6;
     border-color: #2754e6;
+    margin: 1px 0;
 }
 .btn-info:hover {
     color: #fff;
