@@ -67,10 +67,12 @@ class HomeController extends Controller
         $year = $now->year;
 
         $idAdmin = User::query()->where('id', 5)->first();
-        $postAdminIds = $idAdmin->posts->pluck('id')->toArray();
+        $postAdminIds = $idAdmin?->posts->pluck('id')->toArray();
         $tops = PostLike::query()
             ->select('post_id', DB::raw('count(*) as like_count'))
-            ->whereNotIn('post_id', $postAdminIds)
+            ->when($postAdminIds, function ($query, $postAdminIds) {
+                return $query->whereNotIn('post_id', $postAdminIds);
+            })
             ->whereMonth('created_at', $month)
             ->whereYear('created_at', $year)
             ->groupBy('post_id')
