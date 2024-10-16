@@ -78,6 +78,10 @@ class TotalRewardResource extends Resource
                                     ->get();
 
                                 $totalLikePostAllUser = $tops->sum('like_count');
+
+                                if ($totalLikePostAllUser <= 0) {
+                                    return;
+                                }
                                 $price_per_like = $record->total_reward / $totalLikePostAllUser;
 
                                 foreach ($tops as $top) {
