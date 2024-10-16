@@ -205,6 +205,13 @@ class PostController extends Controller
 
     public function likePost(Request $request)
     {
+        $currentSessionId = \request()->cookie('session_id');
+//        if ($currentSessionId == null) {
+//            return response()->json([
+//                'status' => 'error',
+//                'msg' => 'Session id not found !'
+//            ], 400);
+//        }
         $data = $request->all();
         $data['ip'] = $request->ip();
         $post = Post::query()->where('id', $data['post_id'])->first();

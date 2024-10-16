@@ -64,11 +64,13 @@ class TotalRewardResource extends Resource
                             try {
                                 // lay tat ca bai viet cua admin de ko tinh vao like
                                 $idAdmin = User::query()->where('id', 5)->first();
-                                $postAdminIds = $idAdmin->posts->pluck('id')->toArray();
+                                $postAdminIds = $idAdmin?->posts?->pluck('id')->toArray();
 
                                 $tops = PostLike::query()
                                     ->select('post_id', DB::raw('count(*) as like_count'))
-                                    ->whereNotIn('post_id', $postAdminIds)
+                                    ->when($postAdminIds, function ($query, $postAdminIds) {
+                                        return $query->whereNotIn('post_id', $postAdminIds);
+                                    })
                                     ->whereMonth('created_at', Carbon::now()->month)
                                     ->whereYear('created_at', Carbon::now()->year)
                                     ->groupBy('post_id')

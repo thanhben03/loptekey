@@ -53,5 +53,9 @@ Route::get('/hide-post', [PostController::class, 'hidePost'])->name('hidePost');
 Route::post('/like-post', [PostController::class, 'likePost'])->name('likePost');
 Route::post('/get-comment/', [CommentController::class, 'getCommentByIdPost'])->name('getCommentByIdPost');
 Route::post('/comment/', [CommentController::class, 'postComment'])->name('postComment');
+Route::post('/live-license', [\App\Http\Controllers\KeyController::class, 'liveLicense'])->name('api.liveLicense');
+Route::post('/active', [\App\Http\Controllers\KeyController::class, 'checkLicense'])->name('api.checkLicense');
+
+
 
 require __DIR__.'/auth.php';

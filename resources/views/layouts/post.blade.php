@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="{{asset('post/css/lightbox.css')}}">
     <link rel="stylesheet" href="{{asset('post/css/custom.css')}}">
     <link rel="stylesheet" href="{{asset('user/assets/libs/sweetalert2/sweetalert2.min.css')}}">
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <style>
         .hide-content-post > p {
             display: -webkit-box;
@@ -229,6 +229,9 @@
 <script src="{{asset('post/js/scripts.js')}}"></script>
 <script src="{{asset('post/js/moment.js')}}"></script>
 <script src="{{asset('post/js/moment-with-locales.js')}}"></script>
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 {{--<script src="{{asset('post/js/bootstrap.bundle.min.js')}}"></script>--}}
 @stack('custom-js')
 <script>
