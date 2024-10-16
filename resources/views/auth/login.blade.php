@@ -23,7 +23,7 @@
         <div class="col-xl-4 col-md-5">z
             <div class="card">
                 <div class="card-header">
-                    <a href="">Xem Hướng Dẫn & Đặc Quyền Của ViP</a>
+                    <a href=""><span style="font-weight: 900; font-size: 17px">Xem Hướng Dẫn & Đặc Quyền Của ViP</span></a>
                 </div>
                 <div class="card-body p-4">
 
