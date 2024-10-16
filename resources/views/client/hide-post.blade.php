@@ -4,9 +4,9 @@
 @section('content')
 
     <!-- Modal -->
-    <div class="modal fade" id="modal-noti" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade"  id="modal-noti" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
-            <div class="modal-content">
+            <div class="modal-content" style="z-index: 99">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Thông báo</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -130,7 +130,11 @@
                                                 </i>
                                             </a>
                                             <span id="post-{{$post->id}}">{{isset($post->like) ? $post->like->count() : 0}} </span>
-
+                                            <span style="
+                                                    margin-left: 10px;
+                                                    background: aquamarine;
+                                                    padding: 1px 8px;
+                                                    border-radius: 4px;">Like bài viết để thấy link tải</span>
                                             <div class="dropdown-menu dropdown-menu-end p-4 rounded-xxl border-0 shadow-lg" aria-labelledby="dropdownMenu21">
                                                 <h4 class="fw-700 font-xss text-grey-900 d-flex align-items-center">Share <i class="feather-x ms-auto font-xssss btn-round-xs bg-greylight text-grey-900 me-2"></i></h4>
                                                 <div class="card-body p-0 d-flex">
@@ -234,6 +238,7 @@
             console.log('123')
             let modal = $("#modal-noti");
                 modal.modal('show')
+            $(".modal-backdrop.fade.show").css('z-index', 0)
         }
     </script>
 @endpush
