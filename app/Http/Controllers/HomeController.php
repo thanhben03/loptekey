@@ -66,7 +66,7 @@ class HomeController extends Controller
         $month = $now->month;
         $year = $now->year;
 
-        $idAdmin = User::query()->where('id', 1)->first();
+        $idAdmin = User::query()->where('id', 5)->first();
         $postAdminIds = $idAdmin->posts->pluck('id')->toArray();
         $tops = PostLike::query()
             ->select('post_id', DB::raw('count(*) as like_count'))
@@ -132,6 +132,7 @@ class HomeController extends Controller
         return PostLike::query()
             ->select('post_id', DB::raw('count(*) as like_count'))
             ->whereIn('post_id', $postIds)
+
             ->whereMonth('created_at', $month)
             ->whereYear('created_at', $year)
             ->groupBy('post_id')
