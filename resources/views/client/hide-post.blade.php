@@ -16,7 +16,7 @@
                         Bạn phải là thành viên vip mới có thể like
                     </p>
                     <p>
-                        Link đăng ký và hướng dẫn: <a href="">Tại đây</a>
+                        Link đăng ký và hướng dẫn: <a href="https://www.gamelopte.com/huong-dan-dang-ky-tk-tai-game-app-xem-phim">Tại đây</a>
                     </p>
                 </div>
                 <div class="modal-footer">
