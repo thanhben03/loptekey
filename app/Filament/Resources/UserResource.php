@@ -52,7 +52,7 @@ class UserResource extends Resource
                         }
                         return 'info';
                     })
-                    ->searchable()
+
             ])
             ->filters([
                 //
