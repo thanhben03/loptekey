@@ -15,6 +15,16 @@
     <link href="{{asset('user/assets/css/style.min.css')}}" rel="stylesheet" type="text/css">
     <link href="{{asset('user/assets/css/icons.min.css')}}" rel="stylesheet" type="text/css">
     <script src="{{asset('user/assets/js/config.js')}}"></script>
+    <style>
+        .btn-hotro {
+            font-size: 16px;
+            color: #ffffff !important;
+            font-weight: 900;
+            background: #ff08fe;
+            padding: 3px 12px;
+            border-radius: 4px;
+        }
+    </style>
 </head>
 
 <body class="bg-primary d-flex justify-content-center align-items-center min-vh-100 p-5">
@@ -77,7 +87,7 @@
             <!-- end row -->
             <div class="row mt-3">
                 <div class="col-12 text-center">
-                    <a href="https://www.facebook.com/cnlopte" class="text-white">Hỗ Trợ Fanpage</a>
+                    <a href="https://www.facebook.com/cnlopte" class="text-white btn-hotro">Hỗ Trợ Fanpage</a>
                 </div>
             </div>
         </div> <!-- end col -->

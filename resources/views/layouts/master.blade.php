@@ -117,9 +117,16 @@
 {{--                                    <span class="menu-text">Tất cả bài đăng</span>--}}
 {{--                                </a>--}}
 {{--                            </li>--}}
-
+                            
                         </ul>
                     </div>
+                    <li class="menu-item">
+                        <a href="https://www.facebook.com/cnlopte" class="menu-link">
+                        <span class="menu-icon"><i class="bx bx-help-circle"></i></span>
+
+                            <span class="menu-text">Hỗ Trợ Fanpage</span>
+                        </a>
+                    </li>
                 </li>
 
             </ul>
