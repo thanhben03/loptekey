@@ -6,7 +6,12 @@ use App\Http\Controllers\KeyController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
+use App\Models\User;
+use App\Providers\RouteServiceProvider;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
+use Laravel\Socialite\Facades\Socialite;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,6 +61,23 @@ Route::post('/comment/', [CommentController::class, 'postComment'])->name('postC
 Route::post('/live-license', [\App\Http\Controllers\KeyController::class, 'liveLicense'])->name('api.liveLicense');
 Route::post('/active', [\App\Http\Controllers\KeyController::class, 'checkLicense'])->name('api.checkLicense');
 
+Route::get('/login/google', function () {
+    return Socialite::driver('google')->redirect();
+})->name('auth.google');
+Route::get('/login/google/callback', function () {
+    $user = Socialite::driver('google')->user();
+    $userExist = User::query()->where('email', $user->email)->first();
+    if (!$userExist) {
+        $userExist = User::create([
+            'name' => $user->name,
+            'email' => $user->email,
+            'password' => Hash::make("12345678"),
+        ]);
+    }
 
+    Auth::login($userExist);
 
-require __DIR__.'/auth.php';
+    return redirect(RouteServiceProvider::HOME);
+});
+
+require __DIR__ . '/auth.php';

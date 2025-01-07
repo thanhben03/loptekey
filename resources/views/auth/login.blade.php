@@ -60,7 +60,10 @@
                         <div class="form-group mb-0 text-center">
                             <button class="btn btn-primary w-100" type="submit"> Log In </button>
                         </div>
-
+                        <div class="form-group mb-0 text-center mt-2" style="background-color: #DB4437 !important">
+                            <a style="background: #DB4437 !important;
+    border: navajowhite;" href="/login/google" class="btn btn-primary w-100" type="submit"> Log In with Google </a>
+                        </div>
                     </form>
                 </div> <!-- end card-body -->
             </div>
