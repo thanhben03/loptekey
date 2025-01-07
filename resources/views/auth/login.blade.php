@@ -72,7 +72,11 @@
                 </div> <!-- end col -->
             </div>
             <!-- end row -->
-
+            <div class="row mt-3">
+                <div class="col-12 text-center">
+                    <a href="https://www.facebook.com/cnlopte" class="text-white">Hỗ Trợ Fanpage</a>
+                </div>
+            </div>
         </div> <!-- end col -->
     </div>
     <!-- end row -->

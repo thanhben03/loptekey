@@ -70,8 +70,13 @@
 
             <div class="row mt-3">
                 <div class="col-12 text-center">
-                    <p class="text-white-50">Already have an account ? <a href="pages-login.html" class="text-white font-weight-medium ms-1">Log In</a></p>
+                    <p class="text-white-50">Already have an account ? <a href="/login" class="text-white font-weight-medium ms-1">Log In</a></p>
                 </div> <!-- end col -->
+            </div>
+            <div class="row mt-3">
+                <div class="col-12 text-center">
+                    <a href="https://www.facebook.com/cnlopte" class="text-white">Hỗ Trợ Fanpage</a>
+                </div>
             </div>
             <!-- end row -->
 
