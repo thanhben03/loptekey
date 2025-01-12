@@ -82,6 +82,12 @@
                 <li class="menu-title">Menu</li>
 
                 <li class="menu-item">
+                    <a href="https://www.gamelopte.com/huong-dan-dang-ky-tk-tai-game-app-xem-phim" class="menu-link waves-effect waves-light">
+                        <span class="menu-icon"><i class="bx bxs-bank"></i></span>
+                        <span class="menu-text">Download File Mod</span>
+                    </a>
+                </li>
+                <li class="menu-item">
                     <a href="{{route('charge')}}" class="menu-link waves-effect waves-light">
                         <span class="menu-icon"><i class="bx bxs-bank"></i></span>
                         <span class="menu-text">Nạp tiền</span>
@@ -117,7 +123,7 @@
 {{--                                    <span class="menu-text">Tất cả bài đăng</span>--}}
 {{--                                </a>--}}
 {{--                            </li>--}}
-                            
+
                         </ul>
                     </div>
                     <li class="menu-item">
